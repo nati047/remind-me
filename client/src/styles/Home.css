@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap');
 :root {
   --text-color: white;
-} 
+  --bg-color:  #1a5eff;
+}
+
 
 body {
-  background-color: #1a5eff;
+  background-color: var(--bg-color);
 }
 
 .nav-bar {
@@ -18,6 +21,7 @@ body {
 
 div.logo {
   font-size: 30px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif, cursive;
 }
 
 div.right {
@@ -35,21 +39,52 @@ p.log-in {
 section.main {
   display: flex;
   justify-content: space-between;
-  margin-top: 100px;
+  margin-top: 75px;
   margin-left: 150px;
   margin-right: 150px;
 }
 
 div.introduction {
   color: var(--text-color);
-  border: red solid 1px;
+  /* border: red solid 1px; */
   width: 50%;
 }
 
-h2.now {
+p.now {
   font-size: 50px;
+  font-family: 'Courier New', cursive;
 }
 
-div.image {
+/* div.image {
+  color: black;
+} */
+i.fa-sms {
+  color: black;
+  align-self: center;
+}
+
+div.get-started {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+  margin-left: 150px;
+  margin-right: 150px;
+}
+
+button.cr-ac,
+button.log-in {
+  background-color: var(--bg-color);
   color: var(--text-color);
+  font-size: large;
+  border: white solid 2px;
+  border-radius: 30px;
+  width: 200px;
+  height: 50px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+p.or {
+  color: var(--text-color);
+  font-size: large;
 }
