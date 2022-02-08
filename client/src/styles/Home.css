@@ -3,19 +3,27 @@
   --text-color: white;
   --bg-color:  #1a5eff;
 }
-
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
 
 body {
   background-color: var(--bg-color);
+  
 }
 
 .nav-bar {
-  margin-top: 40px; 
-  margin-left: 150px;
-  margin-right: 150px;
+  height: 75px;
+  padding-left: 150px;
+  padding-right: 150px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   color: var(--text-color);
+  /* background-color: rgba(5,6,11, .1); */
+  box-shadow: black 0px 0px 7px;
   /* max-width: 1100px; */
 }
 
@@ -26,14 +34,17 @@ div.logo {
 
 div.right {
   display: flex;
+  
 }
 
 p.sign-up{
   margin-right: 10px;
+  font-size: 20px;
 }
 
 p.log-in {
   margin-left: 10px;
+  font-size: 20px;
 }
 
 section.main {
@@ -53,6 +64,7 @@ div.introduction {
 p.now {
   font-size: 50px;
   font-family: 'Courier New', cursive;
+  margin-bottom: 50px;
 }
 
 /* div.image {
@@ -61,11 +73,18 @@ p.now {
 i.fa-sms {
   color: black;
   align-self: center;
+  font-size: 400px;
 }
+/* img {
+  width: 50%;
+  height: 400px;
+  opacity: 50%;
+} */
 
 div.get-started {
   display: flex;
   justify-content: center;
+  align-items: center;
   margin-top: 100px;
   margin-left: 150px;
   margin-right: 150px;
@@ -86,5 +105,5 @@ button.log-in {
 
 p.or {
   color: var(--text-color);
-  font-size: large;
+  font-size: 30px;
 }

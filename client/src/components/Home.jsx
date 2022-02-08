@@ -1,6 +1,8 @@
 import React from "react";
 import '../styles/Home.css'
-const Home = () => {
+import bell from '../black-bell.jpg';
+
+function Home() {
 
   return (
     <div className="home">
@@ -30,8 +32,8 @@ const Home = () => {
           Yet, when she looked at today compared to last year, she couldn't see how anything was ever the same.
           </p>
         </div>
-        <i className="fas fa-sms fa-9x"></i>
-
+        <i className="fas fa-sms fa-9x" ></i>
+        {/* <img alt="image loading" src={bell} ></img> */}
       </section>
 
       <div className="get-started" >
