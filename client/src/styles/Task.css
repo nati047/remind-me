@@ -1,0 +1,20 @@
+div.task {
+  background-color: aqua;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 1000px;
+  height: 150px;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.task-footer {
+  display: flex;
+  justify-content: space-between;
+}

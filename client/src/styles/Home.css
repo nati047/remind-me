@@ -9,9 +9,9 @@
   margin: 0;
 }
 
-body {
+div.home {
   background-color: var(--bg-color);
-  
+  height: 100vh;
 }
 
 .nav-bar {
