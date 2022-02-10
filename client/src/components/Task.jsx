@@ -9,13 +9,13 @@ function Task() {
       </div>
       <div className='task-footer'>
         <div className="task-footer-left">
-          <h4 className='task-time'>5:00</h4>
+          <h4 className='task-time'>5:00 pm</h4>
           <h4 className='task-type'>daily</h4>
         </div>
         <div className="task-footer-right">
-          <button className='complete'>Complete</button>
+          <h3 className='complete'>Complete</h3>
           {/* <button className='restart'>Restart</button> */}
-          <button className='delete'>Delete</button>
+          <h3 className='delete'>Delete</h3>
         </div>
       </div>
     </div>
