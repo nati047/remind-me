@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap');
 :root {
   --text-color: white;
-  --bg-color:  #1a5eff;
+  --bg-color:  #0E3794;
 }
 * {
   box-sizing: border-box;
@@ -71,7 +71,7 @@ p.now {
   color: black;
 } */
 i.fa-sms {
-  color: black;
+  color: white;
   align-self: center;
   font-size: 400px;
 }

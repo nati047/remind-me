@@ -1,6 +1,6 @@
-import React from "react";
 import '../styles/Home.css'
 import bell from '../black-bell.jpg';
+import { Navigate, Link } from "react-router-dom";
 
 function Home() {
 
