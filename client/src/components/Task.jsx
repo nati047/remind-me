@@ -13,9 +13,9 @@ function Task() {
           <h4 className='task-type'>daily</h4>
         </div>
         <div className="task-footer-right">
-          <h3 className='complete'>Complete</h3>
+          <h3 className='complete button'>Complete</h3>
           {/* <button className='restart'>Restart</button> */}
-          <h3 className='delete'>Delete</h3>
+          <h3 className='delete button'>Delete</h3>
         </div>
       </div>
     </div>
