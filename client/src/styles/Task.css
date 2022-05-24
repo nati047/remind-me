@@ -1,3 +1,8 @@
+div.tasks-list {
+  margin-left: 300px;
+  margin-top: 200px;
+}
+
 div.task {
   margin-left: 300px;
   margin-top: 10px;
@@ -45,7 +50,7 @@ div.task {
 }
 
 .task-status {
-  background-color: black;
+  background-color: rgb(0, 0, 0);
   color:white;
   text-align: center;
   vertical-align: middle;
@@ -63,10 +68,10 @@ div.task {
 
 .complete {
   color: #3EAB16;
-  border: #3EAB16 1px solid;
+  border: #3EAB16 2px solid;
 }
 
 .delete {
   color:#EB1E07;
-  border:  #EB1E07 1px solid;
+  border:  #EB1E07 2px solid;
 }
