@@ -5,6 +5,7 @@ import Home from './components/Home'
 import Login from './components/Login'
 import Register from './components/Register'
 import Tasks from "./components/Tasks";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (

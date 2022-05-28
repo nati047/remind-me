@@ -1,0 +1,23 @@
+.tasks-list {
+  background-color: #fff;
+  height: 100vh;
+}
+
+/*  @todo edit this */
+.justadiv{
+  height: 400px;
+  width: 100%;
+  border: #3EAB16 1px solid;
+}
+
+.select-frequency {
+  width: 63%;
+  height: 75px;
+  /* border: grey 1px solid; */
+  box-shadow: gray 5px 5px 10px 0px;
+  background-color: white;
+  position: relative;
+  top: -10px;
+  left: 36%;
+}
+/* ----------------- */
