@@ -1,11 +1,11 @@
-div.task {
+.task-container {
   /* margin-left: 300px; */
   margin-top: 10px;
   background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 95%;
+  width: 80%;
   height: 135px;
   padding-bottom: 10px;
   padding-left: 30px;
@@ -26,22 +26,25 @@ div.task {
 
 .task-footer-right {
   display: flex;
-  justify-content: space-between;
-  width: 32%;
+  justify-content: center;
+  width: auto;
   padding-right: 20px;
+  gap: 15px;
 }
 
 .task-footer-left {
   display: flex;
-  justify-content: space-between;
-  width: 15%;
+  justify-content: center;
+  gap: 15px;
+  width: auto;
 }
 
 .task-name {
-  width: 75%;
+  width: 70%;
   border-bottom: solid rgb(192, 192, 192) 1px;
   padding-top: 10px;
   padding-bottom: 10px;
+  font-size: 25px;
 }
 
 .task-status {
@@ -51,15 +54,26 @@ div.task {
   vertical-align: middle;
   width: 96px;
   height: 24px;
+  font-size: 17px;
+}
+
+.task-time {
+  font-size: 15px;
+}
+
+.task-type {
+  font-size: 15px;
 }
 
 .task-button {
-  border-radius: 15px;
-  padding-top: 3px;
-  height: 50px;
-  width: 100px;
+  border-radius: 20px;
+  padding: none;
   text-align: center;
   vertical-align: middle;
+  width: 100px;
+  padding: 0 10px;
+  background-color: inherit;
+  font-weight: 700;
 }
 
 .complete  {
@@ -71,3 +85,22 @@ div.task {
   color:#EB1E07;
   border:  #EB1E07 2px solid;
 }
+
+.restart {
+  color: #DBA14A;
+  border:  #DBA14A 2px solid;
+}
+
+.complete:hover {
+  background-color: #beddb4;
+}
+
+.delete:hover {
+  background-color: #dfb9b5;
+}
+
+.restart:hover {
+  background-color: #dbc6a7;
+}
+
+

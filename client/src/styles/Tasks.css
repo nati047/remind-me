@@ -1,13 +1,15 @@
+
 .tasks-list {
   background-color: #fff;
   height: 100vh;
+  
 }
 
-/*  @todo edit this */
+/*  @todo edit this class names */
 .justadiv{
-  height: 400px;
+  height: 70vh;
   width: 100%;
-  border: #3EAB16 1px solid;
+  box-shadow: black 0px 0px 7px;
 }
 
 .select-frequency {
@@ -19,5 +21,24 @@
   position: relative;
   top: -10px;
   left: 36%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5vw;
 }
-/* ----------------- */
+
+.frequency {
+  border-bottom: 1px solid black;
+  padding-left: 6px;
+  padding-right: 6px;
+  color: #0E3794;
+  font-size: 25px;
+  font-weight: 800;
+  padding-bottom: 3px;
+}
+
+.active {
+  color: red;
+  background-color: aqua;
+  border: none;
+}
