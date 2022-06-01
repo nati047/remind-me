@@ -4,7 +4,7 @@ import { Spinner } from 'react-bootstrap';
 import '../styles/Create-Task.css';
 
 function CreateTask() {
- 
+
   const day = new Date(Date.now())
   return (
     <Formik
@@ -28,19 +28,26 @@ function CreateTask() {
       {formik => (
         <form onSubmit={formik.handleSubmit} className="form-create-task" >
           {formik.isSubmitting && 'submitting'}
-          <label htmlFor='taskName' >Task name</label>
+          <div className="label-error">
+            <label className="task-label" htmlFor='taskName' >Task</label>
+            {formik.touched.taskName && formik.errors.taskName ? (
+                <div className='error-msg' >{formik.errors.taskName}</div>
+              ) : <div></div>}
+          </div>
           <input
             id='taskName'
             name='taskName'
             type='text'
             {...formik.getFieldProps('taskName')}
-            
-          />
-          {formik.touched.taskName && formik.errors.taskName ? (
-            <div>{formik.errors.taskName}</div>
-          ) : null}
 
-          <label htmlFor='taskType' >Task Type</label>
+          />
+
+          <div className="label-error">
+            <label className="task-label" htmlFor='taskType' >Task Type</label>
+            {formik.touched.taskType && formik.errors.taskType ? (
+              <div className='error-msg' >{formik.errors.taskType}</div>
+            ) : <div></div>}
+          </div>
           <select
             id='taskType'
             name='taskType'
@@ -53,22 +60,22 @@ function CreateTask() {
             <option value="weekly">Weekly</option>
             <option value="monthly">Monthly</option>
           </select>
-          {formik.touched.taskType && formik.errors.taskType ? (
-            <div>{formik.errors.taskType}</div>
-          ) : null}
 
-          <label htmlFor='date' >Date</label>
+          <div className="label-error">
+            <label className="task-label" htmlFor='date' >Date</label>
+            {formik.touched.date && formik.errors.date ? (
+              <div className='error-msg' >{formik.errors.date}</div>
+            ) : <div></div>}
+          </div>
           <input
             id='date'
             name='date'
             type='datetime-local'
             {...formik.getFieldProps('date')}
           />
-          {formik.touched.date && formik.errors.date ? (
-            <div>{formik.errors.date}</div>
-          ) : <div></div>}
 
-          <label htmlFor='time' >Time</label>
+
+          {/* <label htmlFor='time' >Time</label>
           <input
             id='time'
             name='time'
@@ -77,14 +84,14 @@ function CreateTask() {
           />
           {formik.touched.time && formik.errors.time ? (
             <div>{formik.errors.time}</div>
-          ) : null}
+          ) : null} */}
 
-          {formik.isSubmitting ? 
-              <span className="task-submitting">
-                <Spinner animation="border" role="status">
-                </Spinner> 
-                Submitting...
-              </span> :
+          {formik.isSubmitting ?
+            <span className="task-submitting">
+              <Spinner animation="border" role="status">
+              </Spinner>
+              Submitting...
+            </span> :
             <button className="create-button" type='submit'>Create Task</button>
           }
 

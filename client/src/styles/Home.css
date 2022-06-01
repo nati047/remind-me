@@ -65,7 +65,7 @@ div.get-started {
 
 button.cr-ac,
 button.log-in {
-  background-color: var(--bg-color);
+  background-color: rgb(5, 15, 44);
   color: var(--text-color);
   font-size: large;
   border: white solid 2px;

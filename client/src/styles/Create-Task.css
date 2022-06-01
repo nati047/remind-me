@@ -9,7 +9,7 @@
   flex-direction: column;
   gap: 10px;
   padding-top: 10%;
-  padding-left: 10%;
+  padding-left: 15%;
   color: white;
   font-size: 22px; 
   font-weight: 500;
@@ -21,17 +21,39 @@
   align-self: center;
 }
 
-.form-create-task input, .form-create-task select {
-  height: 30px;
-  width: 90%;
+.form-create-task input, .form-create-task select  {
+  height: 40px;
+  width: 80%;
   border-radius: 30px;
   text-align: center;
   border: 2px solid white;
-  background-color: var(--task-bg);
-  color: white;
-
+  color: black;
+  
 }
 
-.create-button {
-  
+.create-button  {
+  width: max-content;
+  height: auto;
+  padding: 5px 25px;
+  border-radius: 30px;
+  border: 2px solid white;
+  background-color: rgb(5, 15, 44);
+  color: white;
+  margin-left: 20%;
+  margin-top: 20px;
+}
+
+.create-button:hover {
+  transform: scale(1.1);
+}
+
+.error-msg {
+  font-size: 15px;
+  color: rgb(201, 36, 36);
+}
+
+.label-error {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
