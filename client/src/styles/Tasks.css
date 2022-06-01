@@ -4,7 +4,10 @@
   height: 100vh;
   
 }
-
+.tasks-main {
+  max-width: 1440px;
+  margin: auto;
+}
 /*  @todo edit this class names */
 .justadiv{
   height: 70vh;

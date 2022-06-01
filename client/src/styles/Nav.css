@@ -1,12 +1,19 @@
 .nav-bar {
   height: 100px;
-  padding-left: 150px;
-  padding-right: 150px;
+  padding-left: 50px;
+  padding-right: 50px;
+  color: var(--text-color);
+  box-shadow: black 0px 0px 7px;
+  
+}
+
+.nav-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: var(--text-color);
-  box-shadow: black 0px 0px 7px;
+  height: 100%;
+  max-width: 1440px;
+  margin: auto;
 }
 
 .task-nav {
@@ -32,7 +39,7 @@ div.logo {
 div.right {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
 }
 
 p.sign-up{
@@ -42,5 +49,11 @@ p.sign-up{
 
 p.log-in {
   margin-left: 10px;
+  font-size: 20px;
+}
+
+.log-out {
+  vertical-align: center;
+  font-weight: 700;
   font-size: 20px;
 }
