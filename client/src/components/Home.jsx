@@ -1,5 +1,7 @@
 import '../styles/Home.css';
 import Nav from './Nav';
+import Login from './Login';
+import Register from './Register';
 import bell from '../black-bell.jpg';
 import { Navigate, Link } from "react-router-dom";
 
@@ -9,7 +11,7 @@ function Home() {
     <div className="home">
       <Nav/>
       <section className="main">
-        <div className="introduction">
+        {/* <div className="introduction">
           <p className="now" >DO It <strike>later</strike>  Now !</p>
           <p className="about-app">
           She didn't understand how change worked. When she looked at today compared to yesterday, there was nothing that she could see that was different.
@@ -19,7 +21,9 @@ function Home() {
           She didn't understand how change worked. When she looked at today compared to yesterday, there was nothing that she could see that was different.
           Yet, when she looked at today compared to last year, she couldn't see how anything was ever the same.
           </p>
-        </div>
+        </div> */}
+        {/* <Login /> */}
+        <Register />
         <i className="fas fa-sms fa-9x" ></i>
         {/* <img alt="image loading" src={bell} ></img> */}
       </section>

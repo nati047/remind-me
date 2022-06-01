@@ -28,7 +28,6 @@
   text-align: center;
   border: 2px solid white;
   color: black;
-  
 }
 
 .create-button  {
@@ -41,10 +40,6 @@
   color: white;
   margin-left: 20%;
   margin-top: 20px;
-}
-
-.create-button:hover {
-  transform: scale(1.1);
 }
 
 .error-msg {

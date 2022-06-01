@@ -1,0 +1,44 @@
+header {
+  color: white;
+  font-size: 30px;
+  font-weight: 800;
+  margin-left: 15%;
+  margin-bottom: 20px;
+}
+
+.login-form {
+  gap: 20px;
+  width: 40%;
+}
+
+.input-label {
+  gap: 10px;
+  color: aliceblue;
+  font-size: 20px;
+  font-weight: 500;
+  
+}
+
+.login-btn {
+  width: max-content;
+  height: auto;
+  padding: 5px 25px;
+  border-radius: 30px;
+  border: 2px solid white;
+  background-color: rgb(5, 15, 44);
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  margin-left: 30%;
+  margin-top: 20px;
+}
+
+.login-form input, 
+.login-form select {
+  height: 50px;
+  width: 80%;
+  border-radius: 30px;
+  text-align: center;
+  border: 2px solid white;
+  color: black;
+}
