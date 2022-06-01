@@ -25,9 +25,7 @@ function Tasks() {
         <Container fluid style={{ marginTop: "0px"}}>
           <Row>
           <Col lg={4} style={{ marginTop: "0px"}}>
-            <div className="justadiv">
-              <CreateTask />
-            </div>
+            <CreateTask />
           </Col >
           <Col >
             <Container style={{ 

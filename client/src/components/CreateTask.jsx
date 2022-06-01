@@ -1,10 +1,11 @@
 import { Formik, Field, Form, ErrorMessage, useField, } from 'formik';
 import * as Yup from 'yup';
-import { Spinner } from 'react-bootstrap'
+import { Spinner } from 'react-bootstrap';
+import '../styles/Create-Task.css';
 
 function CreateTask() {
  
-  let day = new Date(Date.now())
+  const day = new Date(Date.now())
   return (
     <Formik
       initialValues={{ taskName: '', taskType: '', date: '', time: '' }
@@ -25,7 +26,7 @@ function CreateTask() {
 
     >
       {formik => (
-        <form onSubmit={formik.handleSubmit} style={{ color: 'white',display: 'flex', flexDirection: 'column', gap: '5px', padding: '50px 10px' }}>
+        <form onSubmit={formik.handleSubmit} className="form-create-task" >
           {formik.isSubmitting && 'submitting'}
           <label htmlFor='taskName' >Task name</label>
           <input
@@ -33,6 +34,7 @@ function CreateTask() {
             name='taskName'
             type='text'
             {...formik.getFieldProps('taskName')}
+            
           />
           {formik.touched.taskName && formik.errors.taskName ? (
             <div>{formik.errors.taskName}</div>
@@ -78,10 +80,12 @@ function CreateTask() {
           ) : null}
 
           {formik.isSubmitting ? 
-            <Spinner animation="border" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </Spinner> : 
-            <button type='submit'>Create Task</button>
+              <span className="task-submitting">
+                <Spinner animation="border" role="status">
+                </Spinner> 
+                Submitting...
+              </span> :
+            <button className="create-button" type='submit'>Create Task</button>
           }
 
         </form>)
