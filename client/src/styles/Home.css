@@ -2,6 +2,9 @@
 :root {
   --text-color: white;
   --bg-color:  #0E3794;
+  --task-bg: #1a2845;
+  --tasks-box-shadow: rgb(1, 28, 68) 0px 0px 20px 2px;
+  --tasks-broder-radius: 7px;
 }
 
 * {

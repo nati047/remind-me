@@ -1,8 +1,6 @@
-
 .tasks-list {
-  background-color: #fff;
-  height: 100vh;
-  
+  background-color: rgb(9, 34, 91);
+  min-height: 100vh;
 }
 .tasks-main {
   max-width: 1440px;
@@ -12,15 +10,18 @@
 .justadiv{
   height: 70vh;
   width: 100%;
-  box-shadow: black 0px 0px 7px;
+  box-shadow: var(--tasks-box-shadow);
+  background-color: var(--task-bg);
+  border-radius: var(--tasks-broder-radius);
+  margin-left: 5%;
 }
 
 .select-frequency {
   width: 63%;
   height: 75px;
-  /* border: grey 1px solid; */
-  box-shadow: gray 5px 5px 10px 0px;
-  background-color: white;
+  border-radius: var(--tasks-broder-radius);
+  box-shadow: var(--tasks-box-shadow);
+  background-color: var(--task-bg);
   position: relative;
   top: -10px;
   left: 36%;
@@ -34,7 +35,7 @@
   border-bottom: 1px solid black;
   padding-left: 6px;
   padding-right: 6px;
-  color: #0E3794;
+  color: rgb(255, 255, 255);
   font-size: 25px;
   font-weight: 800;
   padding-bottom: 3px;

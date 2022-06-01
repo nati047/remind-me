@@ -17,7 +17,9 @@
 }
 
 .task-nav {
-  color: #0E3794;
+  /* color: #0E3794; */
+  background: linear-gradient(137deg, rgba(2,0,36,1) 0%, rgba(14,55,148,1) 74%, rgba(0,127,255,1) 100%);
+  background: rgb(9, 34, 91);
 }
 
 .avatar {

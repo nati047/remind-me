@@ -1,7 +1,7 @@
 .task-container {
   /* margin-left: 300px; */
   margin-top: 10px;
-  background-color: white;
+  background-color: var(--task-bg);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -9,8 +9,10 @@
   height: 135px;
   padding-bottom: 10px;
   padding-left: 30px;
-  border: rgb(221, 221, 221) 1px solid;
-  box-shadow: grey 2px 4px 5px;
+  /* border: rgb(221, 221, 221) 1px solid; */
+  box-shadow: var(--tasks-box-shadow);
+  border-radius: var(--tasks-broder-radius);
+  color: white;
 }
 
 .task-header {

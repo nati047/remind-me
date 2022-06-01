@@ -8,7 +8,7 @@ import CreateTask from "./CreateTask";
 function Tasks() {
   
   const handleClick = (event) => {
-    event.toggleClass('active')
+    // event.toggleClass('active')
   }
   
   return (

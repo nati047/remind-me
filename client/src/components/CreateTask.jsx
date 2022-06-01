@@ -1,26 +1,18 @@
 import { Formik, Field, Form, ErrorMessage, useField, } from 'formik';
 import * as Yup from 'yup';
 import { Spinner } from 'react-bootstrap'
-function CreateTask() {
-  const TextInput = ({ label, ...props }) => {
-    const [field, meta] = useField(props);
-    return (
-      <>
-        <label htmlFor={props.name}>{label}</label>
-        <input className="text-input" {...field} {...props} />
-        {meta.touched && meta.error ? (
-          <div className="error">{meta.error}</div>
-        ) : null}
-      </>
-    );
-  }
 
+function CreateTask() {
+ 
+  let day = new Date(Date.now())
   return (
     <Formik
       initialValues={{ taskName: '', taskType: '', date: '', time: '' }
       }
       validationSchema={Yup.object({
-        taskName: Yup.string().min(4, 'Must be more than 3 charachters'),
+        taskName: Yup.string().required().min(4, 'Must be more than 3 charachters'),
+        taskType: Yup.string().required(),
+        date: Yup.date().min(day, 'Date can not be in the past').required('date is required'),
       })}
       onSubmit={(values, { setSubmitting, resetForm }) => {
         console.log(values);
@@ -33,7 +25,7 @@ function CreateTask() {
 
     >
       {formik => (
-        <form onSubmit={formik.handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '5px', padding: '50px 10px' }}>
+        <form onSubmit={formik.handleSubmit} style={{ color: 'white',display: 'flex', flexDirection: 'column', gap: '5px', padding: '50px 10px' }}>
           {formik.isSubmitting && 'submitting'}
           <label htmlFor='taskName' >Task name</label>
           <input
@@ -67,12 +59,12 @@ function CreateTask() {
           <input
             id='date'
             name='date'
-            type='date'
+            type='datetime-local'
             {...formik.getFieldProps('date')}
           />
           {formik.touched.date && formik.errors.date ? (
             <div>{formik.errors.date}</div>
-          ) : null}
+          ) : <div></div>}
 
           <label htmlFor='time' >Time</label>
           <input
