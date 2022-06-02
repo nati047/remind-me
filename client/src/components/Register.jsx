@@ -1,11 +1,10 @@
 import React from "react";
 import "../styles/Login.css";
-import { Formik, yupToFormErrors, } from 'formik'; 
+import { Formik, } from 'formik'; 
 import * as Yup from 'yup';
 import "yup-phone";
 
 function Register() {
-  const phoneSchema = Yup.string().phone("CA").required();
 
   return(
     <Formik 

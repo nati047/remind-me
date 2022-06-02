@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
-
-const db = new Sequelize(process.env.DATABASE_URL || "postgres://localhost:5432/remindMe", {
+// todo- remove hard coded url
+const db = new Sequelize(process.env.DATABASE_URL || "postgres://natnaeltekletsadik@localhost:5432/remindme", {
   logging: false
 });
 
@@ -15,6 +15,6 @@ const test = async () => {
 
 }
 
-test();
+// test();
 
 module.exports = db;
