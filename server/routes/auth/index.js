@@ -35,13 +35,42 @@ router.get("/login", async (req, res) => {
 
   }
   catch (err){
+    console.log("db error\n", err);
     res.sendStatus(401).json({ error: 'server error' })
   }
 });
 
-router.post("/register", (req, res) => {
+router.post("/register", async (req, res) => {
+  const newUser = req.body;
+  try {
+    
+    if (!newUser.userName || !newUser.password || !newUser.phoneNumber) {
+      res.sendStatus(400).json({ error: "all fields are required"})
+    }
+    
+    const user = await User.create();
+    
+    const token = jwt.sign(
+      {id: user.dataValues.id},
+      process.env.SESSION_SECRET,
+      { expiresIn: 60000 }
+    );
+    
+    res.json({
+      user: user.dataValues,
+      token,
+    });
 
-  res.send('login page')
-});
+  }
+  catch  (error) {
+    if (error.name === "SequelizeUniqueConstraintError") {
+      return res.status(401).json({ error: "User already exists" });
+    }
+     else if (error.name === "SequelizeValidationError") {
+      return res.status(401).json({ error: "Validation error" });
+    }
+     else res.sendStatus(400).json({ error: 'server error' });
+  }
+}); 
 
 module.exports = router;
