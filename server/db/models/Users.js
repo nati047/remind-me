@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const crypto = require("crypto");
-const db = require('../index.js');
+const db = require('../db');
 
 const User = db.define("user", {
   userName: {
