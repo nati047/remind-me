@@ -1,5 +1,8 @@
-const express  = require('express');
-// const router = require('express').Router();
+require('dotenv').config();
+const express = require('express');
+const jwt = require('jsonwebtoken');
+const { User } = require('./db/models');
+
 const app = express();
 const bodyParser = require("body-parser");
 const PORT = process.env.PORT || 2020;
@@ -9,9 +12,33 @@ require('dotenv').config();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// authorize user using jwt
+app.use((req, res, next) => {
+  const token = req.headers["x-access-token"];
+  if (token) {
+    jwt.verify(token, process.env.SESSION_SECRET, (err, decoded) => {
+      if (err)
+        next();
+      User.findOne({
+        where: {
+          id: decoded.id
+        }
+      })
+      .then( user => {
+        req.user = user;
+      }).catch(() => {
+        next();
+      });
+    });
+  } 
+  else {
+    next();
+  }
+});
+
 // mount routers 
-app.use("/auth", require("./auth"));
-app.use("/api", require("./api"));
+app.use("/auth", require("./routes/auth"));
+app.use("/api", require("./routes/api"));
 
 
 app.listen(PORT, () => {

@@ -14,6 +14,6 @@ const test = async () => {
   }
 
 };
-test();
+// test();
 
 module.exports = db;
