@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-// todo- remove hard coded url
+// todo - remove hard coded url
 const db = new Sequelize(process.env.DATABASE_URL || "postgres://natnaeltekletsadik@localhost:5432/remindme", {
   logging: false
 });
@@ -14,6 +14,6 @@ const test = async () => {
   }
 
 };
-// test();
+test();
 
 module.exports = db;
