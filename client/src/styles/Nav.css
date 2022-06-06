@@ -1,6 +1,6 @@
 .nav-bar {
   height: 100px;
-  padding-left: 50px;
+  padding-left: 150px;
   padding-right: 50px;
   color: var(--text-color);
   box-shadow: black 0px 0px 7px;
@@ -17,7 +17,7 @@
 }
 
 .task-nav {
-  /* color: #0E3794; */
+  padding-left: 50px;
   background: linear-gradient(137deg, rgba(2,0,36,1) 0%, rgba(14,55,148,1) 74%, rgba(0,127,255,1) 100%);
   background: rgb(9, 34, 91);
 }
@@ -33,9 +33,17 @@
   align-items: center;
 }
 
-div.logo {
+a.logo {
   font-size: 30px;
   font-family: Verdana, Geneva, Tahoma, sans-serif, cursive;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 900;
+}
+a.logo:hover {
+  text-decoration: none;
+  color: inherit;
+  transform: scale(1.05);
 }
 
 div.right {

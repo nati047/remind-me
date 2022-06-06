@@ -3,7 +3,12 @@ import "../styles/Login.css";
 import { Formik, } from 'formik'; 
 import PhoneInput from 'react-phone-number-input'
 
-function Login() {
+function Login( { user }) {
+  
+  // useEffect(() => {
+  //   if (user && user.id) history.push('/tasks');
+  // }, [user, history]);
+
   return(
     <Formik 
       initialValues={{

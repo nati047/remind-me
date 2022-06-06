@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const { is } = require('express/lib/request');
 const { User } = require('../../db/models');
 
 router.get("/login", async (req, res) => {

@@ -1,5 +1,5 @@
 import '../styles/Nav.css';
-import { useLocation } from 'react-router-dom';
+import { useLocation, NavLink } from 'react-router-dom';
 
 function Nav() {
   const location = useLocation().pathname;
@@ -8,7 +8,7 @@ function Nav() {
   return (
     <nav className={navClass}>
       <section className='nav-container'>
-        <div className="logo"><strong>Remind.Me</strong></div>
+        <NavLink to="/" className="logo">Remind.Me</NavLink>
         <div className="right">
           {location === '/' &&  
           <>

@@ -4,7 +4,11 @@ import { Formik, } from 'formik';
 import * as Yup from 'yup';
 import "yup-phone";
 
-function Register() {
+function Register({ user }) {
+  
+  // useEffect(() => {
+  //   if (user && user.id) history.push('/tasks');
+  // }, [user, history]);
 
   return(
     <Formik 
