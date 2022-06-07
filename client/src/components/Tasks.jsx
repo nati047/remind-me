@@ -4,6 +4,7 @@ import Task from "./Task";
 import '../styles/Tasks.css'
 import { Button, Container, Col, Row } from 'react-bootstrap'; 
 import CreateTask from "./CreateTask";
+import { Navigate } from "react-router-dom";
 
 function Tasks({ user, setUser}) {
   
@@ -11,9 +12,15 @@ function Tasks({ user, setUser}) {
     // event.toggleClass('active')
   }
   console.log(user, "user in tasks")
+  if(!user?.id) {
+    return (
+      <Navigate to="/register" />
+    ); 
+   }
+
   return (
     <div className='tasks-list'>
-      <Nav className='dashboard' setUser={setUser}/>
+      <Nav className='dashboard' setUser={setUser} user={user}/>
       <section className="tasks-main">
         <div onClick={handleClick} className="select-frequency">
           <div className="frequency">all</div>
