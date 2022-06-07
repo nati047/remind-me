@@ -5,15 +5,15 @@ import '../styles/Tasks.css'
 import { Button, Container, Col, Row } from 'react-bootstrap'; 
 import CreateTask from "./CreateTask";
 
-function Tasks() {
+function Tasks({ user, setUser}) {
   
   const handleClick = (event) => {
     // event.toggleClass('active')
   }
-  
+  console.log(user, "user in tasks")
   return (
     <div className='tasks-list'>
-      <Nav className='dashboard'/>
+      <Nav className='dashboard' setUser={setUser}/>
       <section className="tasks-main">
         <div onClick={handleClick} className="select-frequency">
           <div className="frequency">all</div>

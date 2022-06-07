@@ -1,10 +1,16 @@
 import '../styles/Nav.css';
 import { useLocation, NavLink } from 'react-router-dom';
-
-function Nav() {
+import swal from "sweetalert"
+function Nav({ setUser}) {
   const location = useLocation().pathname;
   const navClass = location === '/tasks' ? 'nav-bar task-nav' : 'nav-bar';
   
+  const logout = () => {
+    setUser({});
+    localStorage.removeItem('access-token');
+    swal("logout");
+  }
+
   return (
     <nav className={navClass}>
       <section className='nav-container'>
@@ -19,7 +25,7 @@ function Nav() {
           {location === '/tasks' && 
           <>
             <div className='avatar'>N</div>  
-            <div className='log-out'>Logout</div>
+            <div className='log-out' >Logout</div>
           </>
           }
         </div>

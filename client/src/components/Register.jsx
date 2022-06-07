@@ -5,26 +5,35 @@ import { Formik, } from "formik";
 import { useOutletContext, Navigate } from "react-router-dom";
 import * as Yup from "yup";
 import "yup-phone";
+import swal from "sweetalert";
 
 const regisetrUser = async (newUserInfo, setUser) => {
-  console.log(newUserInfo)
   axios.post(`${process.env.REACT_APP_API_URL}/auth/register`, newUserInfo )
   .then( response => {
     const accessToken = response.data.token;
     const user = response.data.user
     localStorage.setItem('access-token', accessToken);
-    alert(localStorage.getItem('access-token'));
-    setUser(user);
+    localStorage.setItem('user-state', JSON.stringify(user));
+    swal("Registration Successful","", "success");
+    setUser(user); 
     console.log("result from api", response.data)
   }).catch( err => {
     alert(err.response.data.error);
     console.log(err.response.data.error);
   });
-}
+};
+
+
 
 function Register() {
   const [user, setUser] = useOutletContext();
-  
+  console.log('user in Register', user)
+  if (user?.id) {
+    return (
+      <Navigate to="/tasks" />
+    );
+  }
+
   return(
     <Formik 
       initialValues={{

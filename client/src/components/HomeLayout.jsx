@@ -1,10 +1,11 @@
 import '../styles/Home.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Nav from './Nav';
 import Login from './Login';
 import Register from './Register';
 import bell from '../black-bell.jpg';
 import { Navigate, Link, Outlet, useLocation } from "react-router-dom";
+
 
  
 
@@ -24,13 +25,12 @@ export const Carousel = () => {
   );
 }
 
-function HomeLayout() {
-  const [user, setUser] = useState({});
+function HomeLayout({ user, setUser}) {
   const location = useLocation();
-
+ 
   return (
     <div className="home">
-      <Nav/>
+      <Nav />
       <section className="main">
         <Outlet context={[user, setUser]} />
         <aside className="home-side-bar">
