@@ -4,8 +4,8 @@ import { Spinner } from 'react-bootstrap';
 import '../styles/Create-Task.css';
 
 function CreateTask() {
-
   const day = new Date(Date.now())
+
   return (
     <Formik
       initialValues={{ taskName: '', taskType: '', date: '', time: '' }

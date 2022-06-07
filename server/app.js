@@ -13,6 +13,7 @@ require('dotenv').config();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
+
 // authorize user using jwt
 app.use((req, res, next) => {
   const token = req.headers["x-access-token"];

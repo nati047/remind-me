@@ -14,11 +14,10 @@ const regisetrUser = async (newUserInfo, setUser) => {
     const user = response.data.user
     localStorage.setItem('access-token', accessToken);
     localStorage.setItem('user-state', JSON.stringify(user));
-    swal("Registration Successful","", "success");
     setUser(user); 
     console.log("result from api", response.data)
   }).catch( err => {
-    alert(err.response.data.error);
+    swal(err.response.data.error, "", "danger");
     console.log(err.response.data.error);
   });
 };

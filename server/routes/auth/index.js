@@ -2,10 +2,12 @@ const router = require('express').Router();
 const jwt = require("jsonwebtoken");
 const { User } = require('../../db/models');
 
-router.get("/login", async (req, res) => {
+router.post("/login", async (req, res) => {
   const { userName, password } = req.body;
+  console.log("req.body", req.body);
   try {
     if(!userName || !password) {
+      console.log("missing stuff")
       return res.status(401).json({ error: 'username and password required' })
     }
 
@@ -27,9 +29,12 @@ router.get("/login", async (req, res) => {
         process.env.SESSION_SECRET,
         { expiresIn: 86400 }
       );
+      console.log("*****************\nlogin successful\n", token)
      return res.json({
-        userName: user.dataValues.userName,
-        id: user.dataValues.id,
+       user :{
+         userName: user.dataValues.userName,
+         id: user.dataValues.id,
+       },
         token,
       });
     }
@@ -37,7 +42,7 @@ router.get("/login", async (req, res) => {
   }
   catch (err){
     console.log("db error\n", err);
-    return res.status(401).json({ error: 'server error' })
+    return res.status(401).json({ error: 'server error' });
   }
 });
 

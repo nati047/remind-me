@@ -14,7 +14,7 @@ function Tasks({ user, setUser}) {
   console.log(user, "user in tasks")
   if(!user?.id) {
     return (
-      <Navigate to="/register" />
+      <Navigate to="/" />
     ); 
    }
 

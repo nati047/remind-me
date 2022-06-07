@@ -5,11 +5,10 @@ function Nav({ setUser, user}) {
   const location = useLocation().pathname;
   const navClass = location === '/tasks' ? 'nav-bar task-nav' : 'nav-bar';
   
-  const logout = () => {
+  const logout = (setUser) => {
     setUser({});
     localStorage.removeItem('access-token');
     localStorage.removeItem('user-state');
-    swal("logout");
   }
  console.log('user in nav', user)
 
@@ -27,7 +26,7 @@ function Nav({ setUser, user}) {
           {location === '/tasks' && 
           <>
             <div className='avatar'>{user?.userName &&  user.userName[0].toUpperCase()}</div>  
-            <div className='log-out' onClick={() => logout()} >Logout</div>
+            <div className='log-out' onClick={() => logout(setUser)} >Logout</div>
           </>
           }
         </div>
