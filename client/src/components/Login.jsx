@@ -1,27 +1,31 @@
 import React from "react";
 import "../styles/Login.css";
 import { Formik, } from 'formik'; 
-import PhoneInput from 'react-phone-number-input'
+import { Navigate, useOutletContext } from 'react-router-dom';
+import axios from "axios";
 
-function Login( { user }) {
-  
-  // useEffect(() => {
-  //   if (user && user.id) history.push('/tasks');
-  // }, [user, history]);
-
+const login = async () => {
+  axios.post(`${process.env.REACT_APP_API_URL}/auth/login`)
+  .then( result => {
+    console.log("result from api", result)
+  }).catch( err => {
+    console.log(err)
+  })
+}
+function Login() {
+  const [user, setUser] = useOutletContext();
+ 
   return(
     <Formik 
       initialValues={{
         login: '',
         password: ''
       }}
-      onSubmit={(values, { setSubmitting, resetForm }) => {
+      onSubmit={async (values, { setSubmitting, resetForm }) => {
         console.log(values);
-
-        setTimeout(() => {
-          resetForm({ values: '' })
-          setSubmitting(false)
-        }, 3000)
+        login(values)
+        resetForm({ values: '' })
+        setSubmitting(false)
       }}
     >
       { formik => (

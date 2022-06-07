@@ -1,11 +1,14 @@
 import '../styles/Home.css';
+import { useState } from 'react';
 import Nav from './Nav';
 import Login from './Login';
 import Register from './Register';
 import bell from '../black-bell.jpg';
 import { Navigate, Link, Outlet, useLocation } from "react-router-dom";
 
- export const Carousel = () => {
+ 
+
+export const Carousel = () => {
   return (
     <div className="introduction">
       <p className="now" >DO It <strike>later</strike>  Now !</p>
@@ -21,19 +24,18 @@ import { Navigate, Link, Outlet, useLocation } from "react-router-dom";
   );
 }
 
-function HomeLayout({ user }) {
+function HomeLayout() {
+  const [user, setUser] = useState({});
   const location = useLocation();
 
   return (
     <div className="home">
       <Nav/>
       <section className="main">
-        <Outlet />
-        {/* <Login /> */}
+        <Outlet context={[user, setUser]} />
         <aside className="home-side-bar">
           <i className="fas fa-sms fa-9x" ></i>
         </aside>
-        {/* <Register /> */}
         {/* <img alt="image loading" src={bell} ></img> */}
       </section>
 
@@ -44,7 +46,6 @@ function HomeLayout({ user }) {
           <button className="log-in" >Log In</button>
         </div>
       }
-
     </div>
     );
 }

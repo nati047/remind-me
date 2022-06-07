@@ -1,11 +1,12 @@
 const router = require('express').Router();
+const jwt = require("jsonwebtoken");
 const { User } = require('../../db/models');
 
 router.get("/login", async (req, res) => {
   const { userName, password } = req.body;
   try {
     if(!userName || !password) {
-      res.sendStatus(401).json({ error: 'username and password required' })
+      return res.status(401).json({ error: 'username and password required' })
     }
 
     const user = await User.findOne({
@@ -14,11 +15,11 @@ router.get("/login", async (req, res) => {
 
     if (!user) {
       console.log({ error: `No user found for username: ${username}` });
-      res.status(401).json({ error: "Wrong username and/or password" });
+      return res.status(401).json({ error: "Wrong username and/or password" });
     } 
     else if (!user.correctPassword(password)) {
       console.log({ error: "Wrong username and/or password" });
-      res.status(401).json({ error: "Wrong username and/or password" });
+      return res.status(401).json({ error: "Wrong username and/or password" });
     } 
     else {
       const token = jwt.sign(
@@ -26,8 +27,9 @@ router.get("/login", async (req, res) => {
         process.env.SESSION_SECRET,
         { expiresIn: 86400 }
       );
-      res.json({
-        ...user.dataValues,
+     return res.json({
+        userName: user.dataValues.userName,
+        id: user.dataValues.id,
         token,
       });
     }
@@ -35,40 +37,51 @@ router.get("/login", async (req, res) => {
   }
   catch (err){
     console.log("db error\n", err);
-    res.sendStatus(401).json({ error: 'server error' })
+    return res.status(401).json({ error: 'server error' })
   }
 });
 
 router.post("/register", async (req, res) => {
   const newUser = req.body;
+  console.log("-----------------------\nregister called", newUser)
   try {
     
-    if (!newUser.userName || !newUser.password || !newUser.phoneNumber) {
-      res.sendStatus(400).json({ error: "all fields are required"})
+    if (!newUser || !newUser.userName || !newUser.password || !newUser.phoneNumber) {
+      console.log("-----------------------\n missing stuff")
+      return res.status(400).json({ error: "all fields are required"});
+      
     }
     
-    const user = await User.create();
-    
+    const user = await User.create(newUser);
+    console.log("user added to db", user.dataValues);
     const token = jwt.sign(
-      {id: user.dataValues.id},
+      { id: user.dataValues.id },
       process.env.SESSION_SECRET,
-      { expiresIn: 60000 }
+      { expiresIn: 300000 }
     );
-    
-    res.json({
-      user: user.dataValues,
-      token,
+
+    console.log("-----------------------\nregister sucess")
+    return res.json({ user :{
+      userName: user.dataValues.userName,
+      id: user.dataValues.id,
+    },
+    token,
     });
 
   }
-  catch  (error) {
+  catch (error) {
     if (error.name === "SequelizeUniqueConstraintError") {
+      console.log("-----------------------\n user exists")
       return res.status(401).json({ error: "User already exists" });
     }
-     else if (error.name === "SequelizeValidationError") {
+    else if (error.name === "SequelizeValidationError") {
+      console.log("-----------------------\n validation error")
       return res.status(401).json({ error: "Validation error" });
     }
-     else res.sendStatus(400).json({ error: 'server error' });
+    else {
+      console.log(error)
+      return res.status(400).json({ error: 'server error' });
+    }
   }
 }); 
 

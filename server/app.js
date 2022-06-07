@@ -1,4 +1,5 @@
 require('dotenv').config();
+const cors = require('cors')
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const { User } = require('./db/models');
@@ -11,14 +12,15 @@ require('dotenv').config();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
+app.use(cors());
 // authorize user using jwt
 app.use((req, res, next) => {
   const token = req.headers["x-access-token"];
+  console.log("*********\n***********\ntoken ", token);
   if (token) {
     jwt.verify(token, process.env.SESSION_SECRET, (err, decoded) => {
       if (err)
-        next();
+      return next();
       User.findOne({
         where: {
           id: decoded.id
@@ -26,13 +28,14 @@ app.use((req, res, next) => {
       })
       .then( user => {
         req.user = user;
+        return next();
       }).catch(() => {
-        next();
+        return next();
       });
     });
   } 
   else {
-    next();
+    return next();
   }
 });
 
@@ -42,5 +45,5 @@ app.use("/api", require("./routes/api"));
 
 
 app.listen(PORT, () => {
-  console.log('server listening')
+  console.log('server listening on port - ', PORT)
 })

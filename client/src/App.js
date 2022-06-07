@@ -13,7 +13,7 @@ function App() {
   
   // add token to all api requests
   axios.interceptors.request.use(async function (config) {
-    const token = await localStorage.getItem('messenger-token');
+    const token = await localStorage.getItem('access-token');
     config.headers['x-access-token'] = token;
     return config;
   });

@@ -1,15 +1,30 @@
 import React from "react";
+import axios from "axios";
 import "../styles/Login.css";
-import { Formik, } from 'formik'; 
-import * as Yup from 'yup';
+import { Formik, } from "formik"; 
+import { useOutletContext, Navigate } from "react-router-dom";
+import * as Yup from "yup";
 import "yup-phone";
 
-function Register({ user }) {
-  
-  // useEffect(() => {
-  //   if (user && user.id) history.push('/tasks');
-  // }, [user, history]);
+const regisetrUser = async (newUserInfo, setUser) => {
+  console.log(newUserInfo)
+  axios.post(`${process.env.REACT_APP_API_URL}/auth/register`, newUserInfo )
+  .then( response => {
+    const accessToken = response.data.token;
+    const user = response.data.user
+    localStorage.setItem('access-token', accessToken);
+    alert(localStorage.getItem('access-token'));
+    setUser(user);
+    console.log("result from api", response.data)
+  }).catch( err => {
+    alert(err.response.data.error);
+    console.log(err.response.data.error);
+  });
+}
 
+function Register() {
+  const [user, setUser] = useOutletContext();
+  
   return(
     <Formik 
       initialValues={{
@@ -17,13 +32,10 @@ function Register({ user }) {
         phoneNumber: '',
         password: ''
       }}
-      onSubmit={(values, { setSubmitting, resetForm }) => {
-        console.log(values);
-
-        setTimeout(() => {
-          resetForm({ values: '' })
-          setSubmitting(false)
-        }, 3000)
+      onSubmit={async (values, { setSubmitting, resetForm }) => {
+        await regisetrUser(values, setUser);
+        resetForm({ values: '' });
+        setSubmitting(false);
       }}
       validationSchema={Yup.object({
         userName: Yup.string().required().min(5, 'Must be 5 charachters or more'),
