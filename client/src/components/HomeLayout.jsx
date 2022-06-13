@@ -43,7 +43,7 @@ function HomeLayout({ user, setUser}) {
         <div className="get-started" >
           <button className="cr-ac" >Create Account</button>
           <p className="or">or</p>
-          <button className="log-in" >Log In</button>
+          <button className="log-in" ><Link to="/login">Log In</Link></button>
         </div>
       }
     </div>

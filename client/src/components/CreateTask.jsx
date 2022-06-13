@@ -2,6 +2,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Spinner } from 'react-bootstrap';
 import '../styles/Create-Task.css';
+import axios from 'axios';
 
 function CreateTask() {
   const day = new Date(Date.now())
@@ -17,11 +18,16 @@ function CreateTask() {
       })}
       onSubmit={(values, { setSubmitting, resetForm }) => {
         console.log(values);
-
-        setTimeout(() => {
+        axios.post("/task/new", values)
+        .then( response => {
+          console.log(response)
           resetForm({ values: '' })
           setSubmitting(false)
-        }, 3000)
+        })
+        .catch( err => {
+          console.log(err);
+        })
+        
       }}
 
     >

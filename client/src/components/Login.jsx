@@ -19,6 +19,7 @@ const login = async (data, setUser) => {
     console.log(err);
   })
 }
+
 function Login() {
   const [user, setUser] = useOutletContext();
   console.log('user in login', user)
