@@ -1,13 +1,14 @@
 require('dotenv').config();
-const cors = require('cors')
-const express = require('express');
-const jwt = require('jsonwebtoken');
-const { User } = require('./db/models');
-
-const app = express();
-const bodyParser = require("body-parser");
 const PORT = process.env.PORT || 2020;
 
+const express = require('express');
+const app = express();
+const { User } = require('./db/models');
+const { scheduleAllTasks } = require("./utils/scheduleMessage");
+
+const jwt = require('jsonwebtoken');
+const bodyParser = require("body-parser");
+const cors = require('cors');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -44,6 +45,7 @@ app.use("/auth", require("./routes/auth"));
 app.use("/api", require("./routes/api"));
 
 
-app.listen(PORT, () => {
-  console.log('server listening on port - ', PORT)
+app.listen(PORT, async () => {
+  console.log('server listening on port - ', PORT);
+  scheduleAllTasks();
 })

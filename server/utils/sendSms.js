@@ -16,7 +16,7 @@ const sendMessage = async (onComplete, data) => {
 
   } catch (err) {
     console.log('twilio error', err);
-    return 'error';
+    return err;
   }
   
 }

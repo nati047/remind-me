@@ -62,4 +62,33 @@ const onComplete = async (data) => { // onComplete
   }
 }
 
-module.exports = scheduleMessage;
+const scheduleAllTasks = () => {
+  try {
+    const tasks = Task.findAll({
+      where: {
+        completed: false
+      },
+      include: User
+    });
+
+    tasks.forEach( task => {
+      const { phoneNumber } = task.user.phoneNumber;
+      const date = new Date(task.date);
+
+      scheduleMessage({
+        date: date,
+        taskId: task.id,
+        body: task.description,
+        to: phoneNumber,
+        from: process.env.TWILIO_PHONE_NUMBER
+      });
+      
+    });
+
+  } catch (err) {
+    console.log(err);
+    return;
+  }
+}
+
+module.exports = { scheduleMessage, scheduleAllTasks};
