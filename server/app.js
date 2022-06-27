@@ -7,7 +7,6 @@ const { User } = require('./db/models');
 const app = express();
 const bodyParser = require("body-parser");
 const PORT = process.env.PORT || 2020;
-require('dotenv').config();
 
 
 app.use(bodyParser.urlencoded({ extended: false }));

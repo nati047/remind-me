@@ -1,7 +1,6 @@
 const router = require('express').Router();
 
-router.get("/user", (req, res) => {
-  res.send('user page')
-});
+router.post("/newTask", require("./newTask"));
+
 
 module.exports = router;

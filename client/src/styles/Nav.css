@@ -67,3 +67,8 @@ p.log-in {
   font-weight: 700;
   font-size: 20px;
 }
+
+.log-out:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
