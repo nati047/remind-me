@@ -4,23 +4,23 @@ const client = require('twilio')(accountSid, authToken);
 
 const sendMessage = async (data, onComplete) => {
   console.log("  data in sendMessage \n ************ ", data);
-  // try {
+  try {
 
 
-  //   const { to, from, body } = data;
+    const { to, from, body } = data;
     
-  //   const response = await client.messages.create({ to, from, body });
+    const response = await client.messages.create({ to, from, body });
 
-  //   console.log('sucess');
+    console.log('message sent sucessfully');
 
-  //   onComplete(data);
+    onComplete(data);
 
-  //   return 'success'; // TODO fix return
+    return 'success'; // TODO fix return
 
-  // } catch (err) {
-  //   console.log('twilio error', err);
-  //   return err;
-  // }
+  } catch (err) {
+    console.log('twilio error', err);
+    return err;
+  }
   
 }
 
