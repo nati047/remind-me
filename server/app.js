@@ -9,19 +9,24 @@ const { scheduleAllTasks } = require("./utils/scheduleMessage");
 const jwt = require('jsonwebtoken');
 const bodyParser = require("body-parser");
 const cors = require('cors');
+const morgan = require('morgan');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
+app.use(morgan('tiny'));
 
 // authorize user using jwt
 app.use((req, res, next) => {
   const token = req.headers["x-access-token"];
-  console.log("*********\n***********\ntoken ", token);
+  console.log("request header token \n", token)
   if (token) {
-    jwt.verify(token, process.env.SESSION_SECRET, (err, decoded) => {
-      if (err)
-      return next();
+    jwt.verify(JSON.parse(token), process.env.SESSION_SECRET, (err, decoded) => {
+      if (err) {
+        return next();
+      } 
+      
+      console.log(" token verified \n")
       User.findOne({
         where: {
           id: decoded.id
@@ -33,6 +38,7 @@ app.use((req, res, next) => {
       }).catch(() => {
         return next();
       });
+
     });
   } 
   else {

@@ -1,6 +1,8 @@
 const router = require('express').Router();
 
-router.post("/newTask", require("./newTask"));
+
+router.use("/newTask", require("./newTask"));
+
 
 
 module.exports = router;

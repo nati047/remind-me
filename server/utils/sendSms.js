@@ -2,22 +2,25 @@ const accountSid = process.env.ACCOUNT_SID;
 const authToken = process.env.AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
 
-const sendMessage = async (onComplete, data) => {
-  try {
-    const { to, from, body } = data;
+const sendMessage = async (data, onComplete) => {
+  console.log("  data in sendMessage \n ************ ", data);
+  // try {
+
+
+  //   const { to, from, body } = data;
     
-    const response = await client.messages.create({ to, from, body });
+  //   const response = await client.messages.create({ to, from, body });
 
-    console.log('sucess');
+  //   console.log('sucess');
 
-    onComplete(data);
+  //   onComplete(data);
 
-    return 'success'; // TODO fix return
+  //   return 'success'; // TODO fix return
 
-  } catch (err) {
-    console.log('twilio error', err);
-    return err;
-  }
+  // } catch (err) {
+  //   console.log('twilio error', err);
+  //   return err;
+  // }
   
 }
 

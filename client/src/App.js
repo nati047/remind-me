@@ -17,6 +17,7 @@ function App() {
     config.headers['x-access-token'] = token;
     return config;
   });
+  
   useEffect(() =>{
     const localState = localStorage.getItem('user-state');
     if(localState) {

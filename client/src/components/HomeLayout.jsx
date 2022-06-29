@@ -27,7 +27,11 @@ export const Carousel = () => {
 
 function HomeLayout({ user, setUser}) {
   const location = useLocation();
- 
+  
+  if (Object.keys(user).length > 0) {
+    return <Navigate to="/tasks" />
+  }
+
   return (
     <div className="home">
       <Nav />

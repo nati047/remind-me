@@ -4,7 +4,7 @@ const { User } = require('../../db/models');
 
 router.post("/login", async (req, res) => {
   const { userName, password } = req.body;
-  console.log("req.body", req.body);
+  
   try {
     if(!userName || !password) {
       console.log("missing stuff")
@@ -29,7 +29,6 @@ router.post("/login", async (req, res) => {
         process.env.SESSION_SECRET,
         { expiresIn: 86400 }
       );
-      console.log("*****************\nlogin successful\n", token)
      return res.json({
        user :{
          userName: user.dataValues.userName,

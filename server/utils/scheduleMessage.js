@@ -1,16 +1,23 @@
 const CronJob = require("cron").CronJob;
-const sendMessage = requie("./sendSms");
-const { Task } = require("../db/models");
+const sendMessage = require("./sendSms");
+const { Task, User } = require("../db/models");
 
 const scheduleMessage = async (data) => {
-  const { date } = data;
-  const job = new CronJob(
-    date,
-    sendMessage(data),
-    onComplete,
-    true, null, null, null, 
-    date.getTimezoneOffset()
-  );
+ try {
+   const date = new Date(data.date);
+
+   console.log("data in scheduleMEssage - dateObj", data, date)
+   const job = new CronJob(
+     date,
+     sendMessage(data, onComplete),
+     onComplete,
+     true, null, null, null, 
+     date.getTimezoneOffset()
+   );
+ } catch (err) {
+  console.log(" cron job error \n", err);
+ }
+
 }
 
 const onComplete = async (data) => { // onComplete
@@ -58,6 +65,7 @@ const onComplete = async (data) => { // onComplete
     scheduleMessage({ date: new Date(task.date), ...data});
 
   } catch (err) {
+
     return; // TODO handle error
   }
 }
@@ -71,19 +79,20 @@ const scheduleAllTasks = () => {
       include: User
     });
 
-    tasks.forEach( task => {
-      const { phoneNumber } = task.user.phoneNumber;
-      const date = new Date(task.date);
-
-      scheduleMessage({
-        date: date,
-        taskId: task.id,
-        body: task.description,
-        to: phoneNumber,
-        from: process.env.TWILIO_PHONE_NUMBER
+    if(tasks.length > 0) {
+      tasks.forEach( task => {
+        const { phoneNumber } = task.user.phoneNumber;
+        const date = new Date(task.date);
+  
+        scheduleMessage({
+          date: date,
+          taskId: task.id,
+          body: task.description,
+          to: phoneNumber,
+          from: process.env.TWILIO_PHONE_NUMBER
+        });
       });
-      
-    });
+    }
 
   } catch (err) {
     console.log(err);
