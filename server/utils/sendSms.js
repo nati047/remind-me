@@ -2,7 +2,7 @@ const accountSid = process.env.ACCOUNT_SID;
 const authToken = process.env.AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
 
-const sendMessage = async (data, onComplete) => {
+const sendSms = async (data, onComplete) => {
   console.log("  data in sendMessage \n ************ ", data);
   try {
 
@@ -24,4 +24,4 @@ const sendMessage = async (data, onComplete) => {
   
 }
 
-module.exports = sendMessage;
+module.exports = sendSms;

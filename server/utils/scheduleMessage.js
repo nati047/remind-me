@@ -1,24 +1,6 @@
 const CronJob = require("cron").CronJob;
-const sendMessage = require("./sendSms");
+const sendSms = require("./sendSms");
 const { Task, User } = require("../db/models");
-
-const scheduleMessage = async (data) => {
- try {
-   const date = new Date(data.date);
-
-   console.log("data in scheduleMEssage - dateObj", data, date)
-   const job = new CronJob(
-     date,
-     sendMessage(data, onComplete),
-     onComplete,
-     true, null, null, null, 
-     date.getTimezoneOffset()
-   );
- } catch (err) {
-  console.log(" cron job error \n", err);
- }
-
-}
 
 const onComplete = async (data) => { // onComplete
   try {
@@ -41,7 +23,7 @@ const onComplete = async (data) => { // onComplete
         let newDate = new Date(task.date);
         newDate.setDate(newDate.getDate() + 1);
         
-        task.update({ date: newDate});
+        task.update({ date: newDate.toString()});
         task.save();
       }
 
@@ -49,7 +31,7 @@ const onComplete = async (data) => { // onComplete
         let newDate = new Date(task.date);
         newDate.setDate(newDate.getDate() + 7);
 
-        task.update({ date: newDate});
+        task.update({ date: newDate.toString()});
         task.save();
       }
 
@@ -57,12 +39,12 @@ const onComplete = async (data) => { // onComplete
         let newDate = new Date(task.date);
         newDate.setMonth(newDate.getMonth() + 1);
 
-        task.update({ date: newDate});
+        task.update({ date: newDate.toString()});
         task.save();
       }
     }
     
-    scheduleMessage({ date: new Date(task.date), ...data});
+    scheduleMessage({ date: newDate, ...data});
 
   } catch (err) {
 
@@ -70,9 +52,37 @@ const onComplete = async (data) => { // onComplete
   }
 }
 
-const scheduleAllTasks = () => {
+const scheduleMessage = async (data) => {
+ try {
+   const date = new Date(data.date);
+
+   const sendReminder = () => {
+    sendSms( data, onComplete);
+   };
+
+   console.log("data in scheduleMEssage - dateObj", data.date, date);
+   if (date > Date.now()) {
+     const job = new CronJob(
+       date,
+       sendReminder,
+       null,
+       true, null, null, null,
+       date.getTimezoneOffset()
+     );
+     job.start();
+
+   }
+ } catch (err) {
+  console.log(" cron job error \n", err);
+ }
+
+}
+
+
+
+const scheduleAllTasks = async () => {
   try {
-    const tasks = Task.findAll({
+    const tasks = await Task.findAll({
       where: {
         completed: false
       },
@@ -81,16 +91,18 @@ const scheduleAllTasks = () => {
 
     if(tasks.length > 0) {
       tasks.forEach( task => {
-        const { phoneNumber } = task.user.phoneNumber;
+        console.log(" all tasks \n ********* ", task.user.phoneNumber)
+        const phoneNumber  = task.user.phoneNumber;
         const date = new Date(task.date);
-  
-        scheduleMessage({
-          date: date,
-          taskId: task.id,
-          body: task.description,
-          to: phoneNumber,
-          from: process.env.TWILIO_PHONE_NUMBER
-        });
+        if (date > Date.now()) {
+          scheduleMessage({
+            date: date,
+            taskId: task.id,
+            body: task.description,
+            to: phoneNumber,
+            from: process.env.TWILIO_PHONE_NUMBER
+          });
+        }
       });
     }
 
