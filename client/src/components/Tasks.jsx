@@ -32,7 +32,7 @@ function Tasks({ user, setUser}) {
         <Container fluid style={{ marginTop: "0px"}}>
           <Row>
           <Col lg={4} style={{ marginTop: "0px"}}>
-            <CreateTask />
+            <CreateTask setUser={setUser}/>
           </Col >
           <Col >
             <Container style={{ 

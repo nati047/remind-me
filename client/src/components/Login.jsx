@@ -10,7 +10,9 @@ const login = async (data, setUser) => {
   .then( response => {
     const accessToken = response.data.token;
     const user = response.data.user;
+
     setUser(user);
+    
     localStorage.setItem("access-token", JSON.stringify(accessToken));
     localStorage.setItem("user-state", JSON.stringify(user));
     console.log("result from api", response)

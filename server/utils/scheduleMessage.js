@@ -8,43 +8,43 @@ const onComplete = async (data) => { // onComplete
 
     const task = await Task.findOne({
       where: {
-        id: taskId 
+        id: taskId
       }
     });
 
-    if(task.frequency === "once") {
-      await task.update({ completed: true});
+    if (task.frequency === "once") {
+      await task.update({ completed: true });
       await task.save();
 
       return;
     } else {
 
-      if(task.frequency === "daily") {
+      if (task.frequency === "daily") {
         let newDate = new Date(task.date);
         newDate.setDate(newDate.getDate() + 1);
-        
-        task.update({ date: newDate.toString()});
-        task.save();
+
+        await task.update({ date: newDate.toString() });
+        await task.save();
       }
 
-      if(task.frequency === "weekly") {
+      if (task.frequency === "weekly") {
         let newDate = new Date(task.date);
         newDate.setDate(newDate.getDate() + 7);
 
-        task.update({ date: newDate.toString()});
-        task.save();
+        await task.update({ date: newDate.toString() });
+        await task.save();
       }
 
-      if(task.frequency === "monthly") {
+      if (task.frequency === "monthly") {
         let newDate = new Date(task.date);
         newDate.setMonth(newDate.getMonth() + 1);
 
-        task.update({ date: newDate.toString()});
-        task.save();
+        await task.update({ date: newDate.toString() });
+        await task.save();
       }
     }
-    
-    scheduleMessage({ date: newDate, ...data});
+
+    scheduleMessage({ date: newDate, ...data });
 
   } catch (err) {
 
@@ -53,28 +53,27 @@ const onComplete = async (data) => { // onComplete
 }
 
 const scheduleMessage = async (data) => {
- try {
-   const date = new Date(data.date);
+  try {
+    const date = new Date(data.date);
 
-   const sendReminder = () => {
-    sendSms( data, onComplete);
-   };
+    const sendReminder = () => {
+      sendSms(data, onComplete);
+    };
 
-   console.log("data in scheduleMEssage - dateObj", data.date, date);
-   if (date > Date.now()) {
-     const job = new CronJob(
-       date,
-       sendReminder,
-       null,
-       true, null, null, null,
-       date.getTimezoneOffset()
-     );
-     job.start();
-
-   }
- } catch (err) {
-  console.log(" cron job error \n", err);
- }
+    console.log("data in scheduleMEssage - dateObj", data.date, date);
+    if (date > Date.now()) {
+      const job = new CronJob(
+        date,
+        sendReminder,
+        null,
+        true, null, null, null,
+        date.getTimezoneOffset()
+      );
+    }
+  } catch (err) {
+    console.log(" cron job error \n", err);
+    return;
+  }
 
 }
 
@@ -89,11 +88,11 @@ const scheduleAllTasks = async () => {
       include: User
     });
 
-    if(tasks.length > 0) {
-      tasks.forEach( task => {
-        console.log(" all tasks \n ********* ", task.user.phoneNumber)
-        const phoneNumber  = task.user.phoneNumber;
+    if (tasks.length > 0) {
+      tasks.forEach(task => {
+        const phoneNumber = task.user.phoneNumber;
         const date = new Date(task.date);
+
         if (date > Date.now()) {
           scheduleMessage({
             date: date,
@@ -107,9 +106,9 @@ const scheduleAllTasks = async () => {
     }
 
   } catch (err) {
-    console.log(err);
+    console.log("All tasks scheduling error", err);
     return;
   }
 }
 
-module.exports = { scheduleMessage, scheduleAllTasks};
+module.exports = { scheduleMessage, scheduleAllTasks };

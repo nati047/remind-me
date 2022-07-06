@@ -3,9 +3,11 @@ import * as Yup from 'yup';
 import { Spinner } from 'react-bootstrap';
 import '../styles/Create-Task.css';
 import axios from 'axios';
-
-function CreateTask() {
+import swal from 'sweetalert';
+import { useNavigate } from "react-router-dom";
+function CreateTask({ setUser }) {
   const day = new Date(Date.now())
+  const navigate = useNavigate();
 
   return (
     <Formik
@@ -28,6 +30,14 @@ function CreateTask() {
         .catch( err => {  
           setSubmitting(false);
           console.log("client error \n",err);
+
+          if (err.response.data.error === "Forbidden Access!") {
+            swal("Session Timedout");
+            setUser({});
+            localStorage.removeItem('access-token');
+            localStorage.removeItem('user-state');
+          }
+          
         });
         
       }}
