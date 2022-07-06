@@ -1,22 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Nav from "./Nav";
 import Task from "./Task";
 import '../styles/Tasks.css'
-import { Button, Container, Col, Row } from 'react-bootstrap'; 
+import { Container, Col, Row } from 'react-bootstrap'; 
 import CreateTask from "./CreateTask";
 import { Navigate } from "react-router-dom";
+import axios from "axios";
+import swal from "sweetalert";
 
 function Tasks({ user, setUser}) {
   
-  const handleClick = (event) => {
-    // event.toggleClass('active')
-  }
-  console.log(user, "user in tasks")
   if(!user?.id) {
     return (
       <Navigate to="/" />
     ); 
    }
+
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_API_URL}/tasks`)
+    .then( response => {
+
+    })
+    .catch( err => {
+
+      if (err.response.data.error === "Forbidden Access!") {
+        swal("Session Timedout");
+        setUser({});
+        localStorage.removeItem('access-token');
+        localStorage.removeItem('user-state');
+      }
+      else {
+        swal(err.response.data.error);  // TODO fix all swal alerts
+      }
+    })
+  }, []);
 
   return (
     <div className='tasks-list'>
