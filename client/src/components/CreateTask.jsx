@@ -5,9 +5,10 @@ import '../styles/Create-Task.css';
 import axios from 'axios';
 import swal from 'sweetalert';
 import { useNavigate } from "react-router-dom";
+
 function CreateTask({ setUser }) {
   const day = new Date(Date.now())
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   return (
     <Formik
@@ -52,16 +53,17 @@ function CreateTask({ setUser }) {
                 <div className='error-msg' >{formik.errors.description}</div>
               ) : <div></div>}
           </div>
-          <input
+          <textarea
             id='description'
             name='description'
             type='text'
+            placeholder='E.g. cancel subscription'
             {...formik.getFieldProps('description')}
 
           />
 
           <div className="label-error">
-            <label className="task-label" htmlFor='taskType' >Task Type</label>
+            <label className="task-label" htmlFor='taskType' >Reminder Frequency</label>
             {formik.touched.taskType && formik.errors.taskType ? (
               <div className='error-msg' >{formik.errors.taskType}</div>
             ) : <div></div>}
@@ -72,7 +74,7 @@ function CreateTask({ setUser }) {
             type='text'
             {...formik.getFieldProps('taskType')}
           >
-            <option value="">select task type</option>
+            <option value="">select reminder frequency</option>
             <option value="once">Once</option>
             <option value="daily">Daily</option>
             <option value="weekly">Weekly</option>

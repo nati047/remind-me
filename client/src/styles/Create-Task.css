@@ -21,13 +21,20 @@
   align-self: center;
 }
 
-.form-create-task input, .form-create-task select  {
+.form-create-task input, 
+.form-create-task select,
+.form-create-task textarea  {
   height: 40px;
   width: 80%;
   border-radius: 30px;
   text-align: center;
   border: 2px solid white;
   color: black;
+}
+
+.form-create-task textarea {
+  height: 60px;
+  border-radius: 10px;
 }
 
 .create-button  {
