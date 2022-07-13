@@ -25,7 +25,8 @@ function Tasks({ user, setUser}) {
         localStorage.removeItem('user-state');
       }
       else {
-        swal(err.response.data.error);  // TODO fix all swal alerts
+        console.log(err.response)
+        // swal(err.response.data.error);  // TODO fix all swal alerts
       }
     })
   }, []);

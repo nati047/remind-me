@@ -18,12 +18,11 @@ router.get("/", async (req, res, next) => {
     if(tasks) {
       res.status(200).json(tasks);
     } else {
-      res.status(400).json({ error: "no tasks found"
-      })
+      res.status(500).json({ error: "server error" })
     }
 
   } catch (err) {
-    console.log(err);
+    console.log("task fetch error ----- \n", err);
     res.status(500).json({ error: "server error"});
   }
 });

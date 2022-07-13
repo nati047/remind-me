@@ -27,6 +27,7 @@ function CreateTask({ setUser }) {
           console.log(response);
           resetForm({ values: '' });
           setSubmitting(false);
+          swal("Task Created!")
         })
         .catch( err => {  
           setSubmitting(false);
