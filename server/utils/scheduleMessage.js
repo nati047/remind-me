@@ -48,7 +48,7 @@ const onComplete = async (data) => { // onComplete
 
   } catch (err) {
 
-    return; // TODO handle error
+    return; // TODO handle error and test what happens with deleted task
   }
 }
 

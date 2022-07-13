@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Nav from "./Nav";
 import Task from "./Task";
 import '../styles/Tasks.css'
@@ -7,13 +7,15 @@ import CreateTask from "./CreateTask";
 import { Navigate } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
+import moment from 'moment';
 
 function Tasks({ user, setUser}) {
-  
+  const [tasks, setTasks] = useState([]);
  
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_API_URL}/api/tasks`)
     .then( response => {
+      setTasks(response.data);
       console.log(" tasks response ------- \n", response.data);
     })
     .catch( err => {
@@ -61,10 +63,19 @@ function Tasks({ user, setUser}) {
               flexDirection: 'column',
               alignItems: 'center'
             }}>
+              {
+                tasks.map( task => {
+                  const date = new Date(task.date);
+                  const dateString = moment(date).format(' MMMM Do - h:mm a');
+                  // console.log(date.toLocaleTimeString() + " " +  date.toDateString() )
+                  console.log(moment(date).format('h:mm:ss a, MMMM Do'))
+                  return <Task key={task.id}  dateString={dateString} task={{ ...task}} />; 
+                })
+              }
+              {/* <Task />
               <Task />
               <Task />
-              <Task />
-              <Task />
+              <Task /> */}
             </Container>
           </Col>
           </Row>

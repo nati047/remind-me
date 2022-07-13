@@ -1,19 +1,20 @@
 import React from "react";
 import '../styles/Task.css';
-import { Button } from 'react-bootstrap';
-
-function Task() {
+function Task({ dateString, task} ) {
   
   return(
     <div className='task-container'>
       <div className='task-header' >
-        <p className='task-name'>Take Vitamins</p>
-        <p className='task-status'>Active</p>
+        <p className='task-name'>{task.description}</p>
+        <p className='task-status'> 
+          { !task.completed && "Active"  }
+          { task.completed && "Complete" }
+        </p>
       </div>
       <div className='task-footer'>
         <div className="task-footer-left">
-          <p className='task-time'>5:00 pm</p>
-          <p className='task-type'>daily</p>
+          <p className='task-time'>{dateString}</p>
+          <p className='task-type'>{task.frequency}</p>
         </div>
         <div className="task-footer-right">
           <button className='complete task-button'>Complete</button>
