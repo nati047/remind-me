@@ -10,16 +10,11 @@ import swal from "sweetalert";
 
 function Tasks({ user, setUser}) {
   
-  if(!user?.id) {
-    return (
-      <Navigate to="/" />
-    ); 
-   }
-
+ 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_URL}/tasks`)
+    axios.get(`${process.env.REACT_APP_API_URL}/api/tasks`)
     .then( response => {
-
+      console.log(" tasks response ------- \n", response.data);
     })
     .catch( err => {
 
@@ -35,11 +30,18 @@ function Tasks({ user, setUser}) {
     })
   }, []);
 
+  if(!user?.id) {
+    return (
+      <Navigate to="/" />
+    ); 
+   }
+
+
   return (
     <div className='tasks-list'>
       <Nav className='dashboard' setUser={setUser} user={user}/>
       <section className="tasks-main">
-        <div onClick={handleClick} className="select-frequency">
+        <div  className="select-frequency">
           <div className="frequency">all</div>
           <div className="frequency">once</div>
           <div className="frequency">daily</div>
