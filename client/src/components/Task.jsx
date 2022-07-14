@@ -1,29 +1,32 @@
 import React from "react";
 import '../styles/Task.css';
 import axios from "axios";
+import swal from "sweetalert";
 
 function Task({ dateString, task} ) {
   
   const statusClass = task.completed ? "task-status completed" : "task-status active";
 
-  const handeleDelete =  () => {
-    axios.delete()
+  const handleDelete =  () => {
+    axios.post(`${process.env.REACT_APP_API_URL}/api/deleteTask`, { id : task.id })
     .then( () => {
-
+      swal("task deleted");
     })
     .catch( err => {
-
+      console.log("deleting error \n", err)
     });
   };
 
-  const handeleComplete =  () => {
-    axios.post()
-    .then( () => {
-
-    })
-    .catch( err => {
-
-    });
+  const handleComplete =  () => {
+    if (!task.completed) {
+      axios.post(`${process.env.REACT_APP_API_URL}/api/completeTask`, { id : task.id })
+      .then( () => {
+        swal("task completed");
+      })
+      .catch( err => {
+        console.log("completing error \n", err)
+      });
+    }
   };
 
   return(

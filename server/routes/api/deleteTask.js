@@ -1,9 +1,9 @@
 const router = require("express").Router();
 const { Task } = require("../../db/models");
 
-router.delete("/", async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   const taskId = req.body.id;
-
+  console.log("request in delete",req.body)
   try {
     if (!req.user) {
       return res.status(401).json({ error: "Forbidden Access!" }); // TODO handle unauthorized request error

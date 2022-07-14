@@ -3,6 +3,7 @@ const { Task } = require("../../db/models");
 
 router.post("/", async (req, res, next) => {
   const taskId = req.body.id;
+  console.log("request in complete",req.body)
   
   try {
     if (!req.user) {

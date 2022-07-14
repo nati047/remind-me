@@ -39,7 +39,6 @@ function CreateTask({ setUser }) {
             localStorage.removeItem('access-token');
             localStorage.removeItem('user-state');
           }
-          
         });
         
       }}
