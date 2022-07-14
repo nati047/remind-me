@@ -2,11 +2,13 @@ import React from "react";
 import '../styles/Task.css';
 function Task({ dateString, task} ) {
   
+  const statusClass = task.completed ? "task-status completed" : "task-status active";
+
   return(
     <div className='task-container'>
       <div className='task-header' >
         <p className='task-name'>{task.description}</p>
-        <p className='task-status'> 
+        <p className={statusClass}> 
           { !task.completed && "Active"  }
           { task.completed && "Complete" }
         </p>

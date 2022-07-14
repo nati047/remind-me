@@ -36,7 +36,6 @@
 
 .task-footer-left {
   display: flex;
-  justify-content: center;
   gap: 15px;
   width: auto;
 }
@@ -50,13 +49,20 @@
 }
 
 .task-status {
-  background-color: rgb(0, 0, 0);
   color:white;
   text-align: center;
   vertical-align: middle;
   width: 96px;
   height: 24px;
   font-size: 17px;
+  border-radius: 0 7px 0 7px;
+}
+
+.active {
+  background-color: rgb(0, 0, 0);
+}
+.completed {
+  background-color: rgb(83, 83, 83);
 }
 
 .task-time {
