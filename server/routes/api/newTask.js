@@ -24,7 +24,7 @@ router.post("/", async (req, res, next) => {
       from: process.env.TWILIO_PHONE_NUMBER
     }
 
-    console.log("data sent from /mewTask to scheduleMessage \n \n", data)
+    console.log("data sent from /newTask to scheduleMessage \n \n", data)
     scheduleMessage(data);
 
     res.sendStatus(200);

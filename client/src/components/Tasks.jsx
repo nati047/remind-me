@@ -11,11 +11,13 @@ import moment from 'moment';
 
 function Tasks({ user, setUser}) {
   const [tasks, setTasks] = useState([]);
- 
+  const [sortedList, setSortedList ] = useState([]);
+
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_API_URL}/api/tasks`)
     .then( response => {
       setTasks(response.data);
+      setSortedList(response.data);
       console.log(" tasks response ------- \n", response.data);
     })
     .catch( err => {
@@ -32,6 +34,18 @@ function Tasks({ user, setUser}) {
       }
     })
   }, []);
+  
+  const handleSort = (event) => {
+    console.log(event.target.innerText, " *********")
+    const sortBy = event.target.innerText;
+    setSortedList( () => {
+      if (sortBy === "all") {
+        return tasks;
+      }
+      const newList = tasks.filter( task => task.frequency === sortBy );
+      return newList;
+    })
+  }
 
   if(!user?.id) {
     return (
@@ -44,12 +58,12 @@ function Tasks({ user, setUser}) {
     <div className='tasks-list'>
       <Nav className='dashboard' setUser={setUser} user={user}/>
       <section className="tasks-main">
-        <div  className="select-frequency">
-          <div className="frequency">all</div>
-          <div className="frequency">once</div>
-          <div className="frequency">daily</div>
-          <div className="frequency">weekly</div> 
-          <div className="frequency">monthly</div>
+        <div  className="select-frequency" onClick={handleSort}>
+          <div className="frequency" >all</div>
+          <div className="frequency" >once</div>
+          <div className="frequency" >daily</div>
+          <div className="frequency" >weekly</div> 
+          <div className="frequency" >monthly</div>
         </div>
         <Container fluid style={{ marginTop: "0px"}}>
           <Row>
@@ -64,18 +78,18 @@ function Tasks({ user, setUser}) {
               alignItems: 'center'
             }}>
               {
-                tasks.map( task => {
+                sortedList.length > 0 &&
+                sortedList.map( task => {
                   const date = new Date(task.date);
                   const dateString = moment(date).format(' MMMM Do - h:mm a');
                   // console.log(date.toLocaleTimeString() + " " +  date.toDateString() )
-                  console.log(moment(date).format('h:mm:ss a, MMMM Do'))
+                  console.log(task.createdAt)
                   return <Task key={task.id}  dateString={dateString} task={{ ...task}} />; 
                 })
               }
-              {/* <Task />
-              <Task />
-              <Task />
-              <Task /> */}
+              {
+                sortedList.length < 1  && <div>no tasks found</div>
+              }
             </Container>
           </Col>
           </Row>

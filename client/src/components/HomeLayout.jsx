@@ -6,7 +6,6 @@ import Register from './Register';
 import bell from '../black-bell.jpg';
 import { Navigate, Link, Outlet, useLocation } from "react-router-dom";
 
-
  
 
 export const Carousel = () => {

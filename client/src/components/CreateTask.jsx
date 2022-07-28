@@ -74,11 +74,11 @@ function CreateTask({ setUser }) {
             type='text'
             {...formik.getFieldProps('taskType')}
           >
-            <option value="">select reminder frequency</option>
+            <option value="">set reminder frequency</option>
             <option value="once">Once</option>
+            <option value="random">Random</option>
             <option value="daily">Daily</option>
             <option value="weekly">Weekly</option>
-            <option value="monthly">Monthly</option>
           </select>
 
           <div className="label-error">

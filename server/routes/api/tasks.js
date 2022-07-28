@@ -12,7 +12,8 @@ router.get("/", async (req, res, next) => {
     const tasks = await Task.findAll({
       where: {
         userId: userId
-      }
+      },
+      order : [ ['createdAt', 'DESC']]
     });
 
     if(tasks) {

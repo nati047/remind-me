@@ -42,3 +42,9 @@ header {
   border: 2px solid white;
   color: black;
 }
+
+.create-account {
+  color: white;
+  position: relative;
+  left: 10%;
+}

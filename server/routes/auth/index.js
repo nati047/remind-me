@@ -16,7 +16,7 @@ router.post("/login", async (req, res) => {
     });
 
     if (!user) {
-      console.log({ error: `No user found for username: ${username}` });
+      console.log({ error: `No user found for provided username` });
       return res.status(401).json({ error: "Wrong username and/or password" });
     } 
     else if (!user.correctPassword(password)) {
