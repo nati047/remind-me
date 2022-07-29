@@ -19,7 +19,7 @@ function App() {
   });
   
   useEffect(() =>{
-    const localState = localStorage.getItem('user-state');
+    const localState = localStorage.getItem('user-state');  // TODO : remove user info from localstorage
     if(localState) {
       setUser(JSON.parse(localState));  
     }
@@ -39,6 +39,7 @@ function App() {
           <Route path="/register" element={<Register />} />
         </Route>
         <Route path="/tasks" element={<Tasks user={user} setUser={setUser}/>} />
+        <Route path="*" element={ <HomeLayout user={user} setUser={setUser} />} />
       </Routes>
     </Router>
     

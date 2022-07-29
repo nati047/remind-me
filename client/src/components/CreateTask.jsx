@@ -15,8 +15,8 @@ function CreateTask({ setUser }) {
       initialValues={{ description: '', taskType: '', date: '', time: '' }
       }
       validationSchema={Yup.object({
-        description: Yup.string().required().min(4, 'Must be more than 3 charachters'),
-        taskType: Yup.string().required(),
+        description: Yup.string().required("Task is required").min(4, 'Must be more than 3 charachters'),
+        taskType: Yup.string().required("required"),
         date: Yup.date().min(day, 'Date can not be in the past').required('date is required'),
       })}
       onSubmit={(values, { setSubmitting, resetForm }) => {
@@ -27,7 +27,7 @@ function CreateTask({ setUser }) {
           console.log(response);
           resetForm({ values: '' });
           setSubmitting(false);
-          swal("Task Created!")
+          swal("Task Created!");
         })
         .catch( err => {  
           setSubmitting(false);
@@ -61,7 +61,6 @@ function CreateTask({ setUser }) {
             {...formik.getFieldProps('description')}
 
           />
-
           <div className="label-error">
             <label className="task-label" htmlFor='taskType' >Reminder Frequency</label>
             {formik.touched.taskType && formik.errors.taskType ? (
@@ -93,19 +92,6 @@ function CreateTask({ setUser }) {
             type='datetime-local'
             {...formik.getFieldProps('date')}
           />
-
-
-          {/* <label htmlFor='time' >Time</label>
-          <input
-            id='time'
-            name='time'
-            type='time'
-            {...formik.getFieldProps('time')}
-          />
-          {formik.touched.time && formik.errors.time ? (
-            <div>{formik.errors.time}</div>
-          ) : null} */}
-
           {formik.isSubmitting ?
             <span className="task-submitting">
               <Spinner animation="border" role="status">
@@ -114,7 +100,6 @@ function CreateTask({ setUser }) {
             </span> :
             <button className="create-button" type='submit'>Create Task</button>
           }
-
         </form>)
       }
 

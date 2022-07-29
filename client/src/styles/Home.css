@@ -71,8 +71,8 @@ div.get-started {
   margin-right: 150px;
 }
 
-button.cr-ac,
-button.log-in {
+.cr-ac,
+.log-in {
   background-color: rgb(5, 15, 44);
   color: var(--text-color);
   font-size: large;
@@ -88,4 +88,10 @@ p.or {
   color: var(--text-color);
   font-size: 30px;
   font-weight: 500;
+}
+.link,
+.link:hover 
+{
+  text-decoration: none;
+  color: inherit;
 }

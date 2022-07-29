@@ -44,9 +44,13 @@ function HomeLayout({ user, setUser}) {
 
       { location.pathname === '/' &&
         <div className="get-started" >
-          <button className="cr-ac" ><Link to="/register" >Create Account</Link></button>
+          <button className="cr-ac" >
+            <Link className="link" to="/register" >Create Account</Link>
+          </button>
           <p className="or">or</p>
-          <button className="log-in" ><Link to="/login">Log In</Link></button>
+          <button className="log-in" >
+            <Link className="link" to="/login">Log In</Link>
+          </button>
         </div>
       }
     </div>
