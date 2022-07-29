@@ -34,8 +34,6 @@ function Task({ dateString, task} ) {
       <div className='task-header' >
         <p className='task-name'>{task.description}</p>
         <p className={statusClass}> 
-          {task.frequency}
-          {" | "}
           { !task.completed && "Active"  }
           { task.completed && "Complete" }
         </p>

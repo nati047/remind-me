@@ -12,6 +12,7 @@ import moment from 'moment';
 function Tasks({ user, setUser}) {
   const [tasks, setTasks] = useState([]);
   const [sortedList, setSortedList ] = useState([]);
+  const [selected, setSelected] = useState("all")
 
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_API_URL}/api/tasks`)
@@ -36,7 +37,18 @@ function Tasks({ user, setUser}) {
   }, []);
   
   const handleSort = (event) => {
-    console.log(event.target.innerText, " *********")
+    console.log(event.target.id, " *********")
+    if (event.target.id === "sort") {
+      return;
+    }
+
+    event.target.classList.add("selected");
+    if (selected.classList) {
+      selected.classList.remove("selected");
+    }
+    
+    setSelected(event.target);
+    
     const sortBy = event.target.innerText;
     setSortedList( () => {
       if (sortBy === "all") {
@@ -44,9 +56,9 @@ function Tasks({ user, setUser}) {
       }
       const newList = tasks.filter( task => task.frequency === sortBy );
       return newList;
-    })
+    });
   }
-
+  
   if(!user?.id) {
     return (
       <Navigate to="/" />
@@ -58,9 +70,9 @@ function Tasks({ user, setUser}) {
     <div className='tasks-list'>
       <Nav className='dashboard' setUser={setUser} user={user}/>
       <section className="tasks-main">
-        <div  className="select-frequency" onClick={handleSort}>
+        <div  id="sort" className="select-frequency" onClick={handleSort}>
           <div className="frequency" >all</div>
-          <div className="frequency" >once</div>
+          <div className="frequency">once</div>
           <div className="frequency" >daily</div>
           <div className="frequency" >weekly</div> 
           <div className="frequency" >monthly</div>
