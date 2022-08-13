@@ -54,5 +54,4 @@ app.use("/api", require("./routes/api"));
 app.listen(PORT, async () => {
   scheduleAllTasks();
   console.log('server listening on port - ', PORT);
-  
 })

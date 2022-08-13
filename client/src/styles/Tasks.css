@@ -6,15 +6,6 @@
   max-width: 1440px;
   margin: auto;
 }
-/*  @todo edit this class names */
-.justadiv{
-  height: 70vh;
-  width: 100%;
-  box-shadow: var(--tasks-box-shadow);
-  background-color: var(--task-bg);
-  border-radius: var(--tasks-broder-radius);
-  margin-left: 5%;
-}
 
 .select-frequency {
   width: 63%;
@@ -32,7 +23,7 @@
 }
 
 .frequency {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgb(255, 255, 255);
   padding-left: 6px;
   padding-right: 6px;
   color: rgb(255, 255, 255);

@@ -26,7 +26,7 @@ function Nav({ setUser, user}) {
           {location === '/tasks' && 
           <>
             <div className='avatar'>{user?.userName &&  user.userName[0].toUpperCase()}</div>  
-            <div className='log-out' onClick={() => logout(setUser)} >Logout</div>
+            <div className='log-out' onClick={() => logout()} >Logout</div>
           </>
           }
         </div>

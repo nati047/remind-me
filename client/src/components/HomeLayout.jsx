@@ -13,12 +13,14 @@ export const Carousel = () => {
     <div className="introduction">
       <p className="now" >DO It <strike>later</strike>  Now !</p>
       <p className="about-app">
-      She didn't understand how change worked. When she looked at today compared to yesterday, there was nothing that she could see that was different.
-      Yet, when she looked at today compared to last year, she couldn't see how anything was ever the same.
-      She didn't understand how change worked. When she looked at today compared to yesterday, there was nothing that she could see that was different.
-      Yet, when she looked at today compared to last year, she couldn't see how anything was ever the same.
-      She didn't understand how change worked. When she looked at today compared to yesterday, there was nothing that she could see that was different.
-      Yet, when she looked at today compared to last year, she couldn't see how anything was ever the same.
+        Get SMS reminders for task you keep forgetting!
+      </p>
+      <p className="about-app">
+        One-time <br />
+        Daily <br />
+        Weekly<br />
+        Monthly<br />
+
       </p>
     </div>
   );
@@ -39,7 +41,6 @@ function HomeLayout({ user, setUser}) {
         <aside className="home-side-bar">
           <i className="fas fa-sms fa-9x" ></i>
         </aside>
-        {/* <img alt="image loading" src={bell} ></img> */}
       </section>
 
       { location.pathname === '/' &&

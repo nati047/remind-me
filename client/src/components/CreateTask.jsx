@@ -12,32 +12,31 @@ function CreateTask({ setUser }) {
 
   return (
     <Formik
-      initialValues={{ description: '', taskType: '', date: '', time: '' }
+      initialValues={{ description: '', taskType: '', date: ''}
       }
       validationSchema={Yup.object({
-        description: Yup.string().required("Task is required").min(4, 'Must be more than 3 charachters'),
+        description: Yup.string().required("Task is required").min(5, 'Must be more than 4 charachters'),
         taskType: Yup.string().required("required"),
         date: Yup.date().min(day, 'Date can not be in the past').required('date is required'),
       })}
       onSubmit={(values, { setSubmitting, resetForm }) => {
-        console.log(values);
-
         axios.post(`${process.env.REACT_APP_API_URL}/api/newTask`, values)
         .then( response => {
           console.log(response);
           resetForm({ values: '' });
           setSubmitting(false);
-          swal("Task Created!");
+          swal("Task Created!","", "success");
         })
         .catch( err => {  
           setSubmitting(false);
-          console.log("client error \n",err);
 
           if (err.response.data.error === "Forbidden Access!") {
             swal("Session Timedout");
             setUser({});
             localStorage.removeItem('access-token');
             localStorage.removeItem('user-state');
+          } else {
+            swal("Invalid Input OR Server error!", "","error")
           }
         });
         
