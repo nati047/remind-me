@@ -47,7 +47,7 @@ function Register() {
       }}
       validationSchema={Yup.object({
         userName: Yup.string().required().min(5, 'Must be 5 charachters or more'),
-        phoneNumber: Yup.string().phone("CA").required(),
+        phoneNumber: Yup.string().phone("CA").required("phone number is required"),
         password: Yup.string().required().min(8, 'Must be more than 8 cahracters').max(15, 'must be less than 16 characters')
       })}
     >

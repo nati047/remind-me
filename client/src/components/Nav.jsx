@@ -5,7 +5,7 @@ function Nav({ setUser, user}) {
   const location = useLocation().pathname;
   const navClass = location === '/tasks' ? 'nav-bar task-nav' : 'nav-bar';
   
-  const logout = (setUser) => {
+  const logout = () => {
     setUser({});
     localStorage.removeItem('access-token');
     localStorage.removeItem('user-state');

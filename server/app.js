@@ -19,7 +19,6 @@ app.use(morgan('tiny'));
 // authorize user using jwt
 app.use((req, res, next) => {
   const token = req.headers["x-access-token"];
-  console.log("request header token \n", token)
   if (token) {
     jwt.verify(JSON.parse(token), process.env.SESSION_SECRET, (err, decoded) => {
       if (err) {

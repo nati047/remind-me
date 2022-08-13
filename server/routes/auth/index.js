@@ -1,15 +1,28 @@
 const router = require('express').Router();
 const jwt = require("jsonwebtoken");
 const { User } = require('../../db/models');
+const Joi = require("joi");
 
 router.post("/login", async (req, res) => {
   const { userName, password } = req.body;
   
+  if(!req.body || !userName || !password) {
+    console.log("missing stuff")
+    return res.status(401).json({ error: 'username and password required' })
+  }
+
+  const loginSchema = Joi.object({
+    userName: Joi.string().required(),
+    password: Joi.string().required()
+  })
+
+  const {error } = loginSchema.validate(req.body);
+  
+  if(error) {
+    return res.status(400).json({ error: 'Invalid Input!' })
+  }
+
   try {
-    if(!userName || !password) {
-      console.log("missing stuff")
-      return res.status(401).json({ error: 'username and password required' })
-    }
 
     const user = await User.findOne({
       where: { userName: userName }
@@ -47,15 +60,22 @@ router.post("/login", async (req, res) => {
 
 router.post("/register", async (req, res) => {
   const newUser = req.body;
-  console.log("-----------------------\nregister called", newUser)
+  if (!req.body || !newUser || !newUser.userName || !newUser.password || !newUser.phoneNumber) {
+    console.log("-----------------------\n missing stuff")
+    return res.status(400).json({ error: "all fields are required"});
+  }
+  const registrationSchema = Joi.object({
+    userName: Joi.string().min(5).required(),
+    phoneNumber: Joi.string.min(10).required(),
+    password: Joi.string().min(8).max(15).required()
+  })
+  const { error } = registrationSchema.validate(req.body);
+
+  if(error) {
+    return res.status(400).json({ error: 'Invalid Input!' })
+  }
+
   try {
-    
-    if (!newUser || !newUser.userName || !newUser.password || !newUser.phoneNumber) {
-      console.log("-----------------------\n missing stuff")
-      return res.status(400).json({ error: "all fields are required"});
-      
-    }
-    
     const user = await User.create(newUser);
     console.log("user added to db", user.dataValues);
     const token = jwt.sign(
