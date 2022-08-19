@@ -13,6 +13,7 @@ const devConnOptions = {
 const prodConnOptions = {
   logging: false,
   dialect: "postgres",
+  ssl: true,
   dialectOptions: {
     ssl: true,
   },
