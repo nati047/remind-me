@@ -20,7 +20,6 @@ function Tasks({ user, setUser }) {
       .then((response) => {
         setTasks(response.data);
         setSortedList(response.data);
-        console.log(" tasks response ------- \n", response.data);
       })
       .catch((err) => {
         if (err.response.data?.error === "Forbidden Access!") {
@@ -36,7 +35,6 @@ function Tasks({ user, setUser }) {
   }, []);
 
   const handleSort = (event) => {
-    console.log(event.target.id, " *********");
     if (event.target.id === "sort") {
       return;
     }
@@ -91,8 +89,6 @@ function Tasks({ user, setUser }) {
                   sortedList.map((task, index) => {
                     const date = new Date(task.date);
                     const dateString = moment(date).format(" MMMM Do - h:mm a");
-                    // console.log(date.toLocaleTimeString() + " " +  date.toDateString() )
-                    console.log(task.createdAt);
                     return (
                       <Task
                         index={index}

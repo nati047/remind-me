@@ -22,7 +22,6 @@ router.get("/", async (req, res, next) => {
       res.status(500).json({ error: "server error" });
     }
   } catch (err) {
-    console.log("task fetch error ----- \n", err);
     res.status(500).json({ error: "server error" });
   }
 });

@@ -16,7 +16,6 @@ const regisetrUser = async (newUserInfo, setUser) => {
       localStorage.setItem("access-token", accessToken);
       localStorage.setItem("user-state", JSON.stringify(true));
       setUser(user);
-      console.log("result from api", response.data);
     })
     .catch((err) => {
       swal(err.response.data.error, { icon: "error" });
@@ -26,7 +25,6 @@ const regisetrUser = async (newUserInfo, setUser) => {
 
 function Register() {
   const [user, setUser] = useOutletContext();
-  console.log("user in Register", user);
   if (user?.id) {
     return <Navigate to="/tasks" />;
   }

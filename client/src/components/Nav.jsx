@@ -10,7 +10,6 @@ function Nav({ setUser, user }) {
     localStorage.removeItem("access-token");
     localStorage.removeItem("user-state");
   };
-  console.log("user in nav", user);
 
   return (
     <nav className={navClass}>

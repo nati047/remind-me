@@ -22,10 +22,8 @@ function App() {
   useEffect(() => {
     const localState = localStorage.getItem("user-state");
     if (localState) {
-      axios
-        .get(`${process.env.REACT_APP_API_URL}/api/user`)
+      axios.get(`${process.env.REACT_APP_API_URL}/api/user`)
         .then((response) => {
-          console.log(response, " vs", user);
           setUser(response.data);
         })
         .catch((err) => {

@@ -7,7 +7,6 @@ router.post("/login", async (req, res) => {
   const { userName, password } = req.body;
 
   if (!req.body || !userName || !password) {
-    console.log("missing stuff");
     return res.status(401).json({ error: "username and password required" });
   }
 
@@ -28,10 +27,8 @@ router.post("/login", async (req, res) => {
     });
 
     if (!user) {
-      console.log({ error: `No user found for provided username` });
       return res.status(401).json({ error: "Wrong username and/or password" });
     } else if (!user.correctPassword(password)) {
-      console.log({ error: "Wrong username and/or password" });
       return res.status(401).json({ error: "Wrong username and/or password" });
     } else {
       const token = jwt.sign(
@@ -62,7 +59,6 @@ router.post("/register", async (req, res) => {
     !newUser.password ||
     !newUser.phoneNumber
   ) {
-    console.log("-----------------------\n missing stuff");
     return res.status(400).json({ error: "all fields are required" });
   }
   const registrationSchema = Joi.object({
@@ -78,14 +74,12 @@ router.post("/register", async (req, res) => {
 
   try {
     const user = await User.create(newUser);
-    console.log("user added to db", user.dataValues);
     const token = jwt.sign(
       { id: user.dataValues.id },
       process.env.SESSION_SECRET,
       { expiresIn: 300000 }
     );
 
-    console.log("-----------------------\nregister sucess");
     return res.json({
       user: {
         userName: user.dataValues.userName,
@@ -95,10 +89,8 @@ router.post("/register", async (req, res) => {
     });
   } catch (error) {
     if (error.name === "SequelizeUniqueConstraintError") {
-      console.log("-----------------------\n user exists");
       return res.status(401).json({ error: "User already exists" });
     } else if (error.name === "SequelizeValidationError") {
-      console.log("-----------------------\n validation error");
       return res.status(401).json({ error: "Validation error" });
     } else {
       console.log(error);

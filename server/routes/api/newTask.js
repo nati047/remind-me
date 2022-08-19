@@ -5,7 +5,7 @@ const Joi = require("joi");
 
 router.post("/", async (req, res, next) => {
   if (!req.user) {
-    return res.status(403).json({ error: "Forbidden Access!" }); // TODO handle unauthorized request error
+    return res.status(403).json({ error: "Forbidden Access!" }); 
   }
   const { phoneNumber, id: userId } = req.user;
 
@@ -44,7 +44,6 @@ router.post("/", async (req, res, next) => {
       from: process.env.TWILIO_PHONE_NUMBER,
     };
 
-    console.log("data sent from /newTask to scheduleMessage \n \n", data);
     scheduleMessage(data);
 
     res.json(newTask);

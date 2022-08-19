@@ -2,10 +2,9 @@ const router = require("express").Router();
 const Joi = require("joi");
 const { Task } = require("../../db/models");
 
-router.post("/", async (req, res, next) => {
-  console.log("request in delete", req.body);
+router.post("/", async (req, res) => {
   if (!req.user) {
-    return res.status(401).json({ error: "Forbidden Access!" }); // TODO handle unauthorized request error
+    return res.status(401).json({ error: "Forbidden Access!" });
   }
 
   if (!req.body || !req.body.id) {
@@ -28,8 +27,6 @@ router.post("/", async (req, res, next) => {
     const deleted = await Task.destroy({
       where: { id: taskId },
     });
-
-    console.log("deleted row \n", deleted);
 
     res.sendStatus(200);
   } catch (err) {

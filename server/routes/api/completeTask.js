@@ -18,10 +18,9 @@ router.post("/", async (req, res, next) => {
   }
 
   const taskId = req.body.id;
-  console.log("request in complete", req.body);
 
   if (!req.user) {
-    return res.status(401).json({ error: "Forbidden Access!" }); // TODO handle unauthorized request error
+    return res.status(401).json({ error: "Forbidden Access!" });
   }
 
   try {

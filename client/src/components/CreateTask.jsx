@@ -25,13 +25,13 @@ function CreateTask({ setUser, setSortedList }) {
         axios
           .post(`${process.env.REACT_APP_API_URL}/api/newTask`, values)
           .then((response) => {
-            console.log("new task",response.data);
             resetForm({ values: "" });
+
             setSubmitting(false);
+
             swal("Task Created!",{icon: "success"});
             
             setSortedList( prev => [response.data, ...prev]);
-
           })
           .catch((err) => {
             setSubmitting(false);

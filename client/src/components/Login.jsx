@@ -16,7 +16,6 @@ const login = async (data, setUser) => {
 
       localStorage.setItem("access-token", JSON.stringify(accessToken));
       localStorage.setItem("user-state", JSON.stringify(true));
-      console.log("result from api", response);
     })
     .catch((err) => {
       swal(err.response.data.error, {icon: "error"});
@@ -25,10 +24,11 @@ const login = async (data, setUser) => {
 
 function Login() {
   const [user, setUser] = useOutletContext();
-  console.log("user in login", user);
+
   if (user?.id) {
     return <Navigate to="/tasks" />;
   }
+
   return (
     <>
     <Formik
@@ -38,7 +38,6 @@ function Login() {
       }}
       
       onSubmit={async (values, { setSubmitting, resetForm }) => {
-        console.log(values);
         await login(values, setUser);
         resetForm({ values: "" });
         setSubmitting(false);
@@ -92,8 +91,6 @@ function Login() {
     </Formik>
 
     </>
-
-    // TODO: add back to registration form
   );
 }
 

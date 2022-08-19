@@ -3,7 +3,6 @@ const sendSms = require("./sendSms");
 const { Task, User } = require("../db/models");
 
 const onComplete = async (data) => {
-  // onComplete
   try {
     const { taskId } = data;
 
@@ -42,7 +41,8 @@ const onComplete = async (data) => {
 
     scheduleMessage({ date: newDate, ...data });
   } catch (err) {
-    return; // TODO handle error and test what happens with deleted task
+    console.log(err);
+    return; 
   }
 };
 
@@ -54,7 +54,6 @@ const scheduleMessage = async (data) => {
       sendSms(data, onComplete);
     };
 
-    console.log("data in scheduleMEssage - dateObj", data.date, date);
     if (date > Date.now()) {
       const job = new CronJob(
         date,
