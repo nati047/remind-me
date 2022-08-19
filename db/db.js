@@ -15,7 +15,10 @@ const prodConnOptions = {
   dialect: "postgres",
   ssl: true,
   dialectOptions: {
-    ssl: true,
+    ssl: {
+      require: true,
+      rejectUnauthorized: false 
+    }
   },
 };
 const connectionOptions =
