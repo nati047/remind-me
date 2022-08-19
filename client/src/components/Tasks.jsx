@@ -23,7 +23,7 @@ function Tasks({ user, setUser }) {
       })
       .catch((err) => {
         if (err.response.data?.error === "Forbidden Access!") {
-          swal("Session Timedout", {icon: "info"});
+          swal("Session Timedout!","Login to gain access!", {icon: "info"});
           setUser({});
           localStorage.removeItem("access-token");
           localStorage.removeItem("user-state");
