@@ -19,6 +19,6 @@ const test = async () => {
     console.error("Unable to connect to the database:", error);
   }
 };
-test();
+// test();
 
 module.exports = db;
