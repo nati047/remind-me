@@ -1,12 +1,12 @@
-const Sequelize = require('sequelize');
+const Sequelize = require("sequelize");
 const crypto = require("crypto");
-const db = require('../db');
+const db = require("../db");
 
 const User = db.define("user", {
   userName: {
     type: Sequelize.STRING,
     allowNull: false,
-    unique: true
+    unique: true,
   },
   phoneNumber: {
     type: Sequelize.STRING,
@@ -15,19 +15,19 @@ const User = db.define("user", {
   password: {
     type: Sequelize.STRING,
     validate: {
-      min: 6
+      min: 6,
     },
     allowNull: false,
     get() {
       return () => this.getDataValue("password");
-    }
+    },
   },
   salt: {
     type: Sequelize.STRING,
     get() {
       return () => this.getDataValue("salt");
-    }
-  }
+    },
+  },
 });
 
 User.prototype.correctPassword = function (plainPassword) {
@@ -39,7 +39,11 @@ User.createSalt = function () {
 };
 
 User.encryptPassword = function (plainPassword, salt) {
-  return crypto.createHash("RSA-SHA256").update(plainPassword).update(salt).digest("hex");
+  return crypto
+    .createHash("RSA-SHA256")
+    .update(plainPassword)
+    .update(salt)
+    .digest("hex");
 };
 
 const setSaltAndPassword = (user) => {
@@ -54,6 +58,5 @@ User.beforeUpdate(setSaltAndPassword);
 User.beforeBulkCreate((users) => {
   users.forEach(setSaltAndPassword);
 });
-
 
 module.exports = User;

@@ -4,27 +4,26 @@ const { Task, User } = require("../../db/models");
 router.get("/", async (req, res, next) => {
   try {
     if (!req.user) {
-      return res.status(401).json({ error: "Forbidden Access!" }); // TODO handle unauthorized request error
+      return res.status(401).json({ error: "Forbidden Access!" });
     }
 
     const { id: userId } = req.user;
 
     const tasks = await Task.findAll({
       where: {
-        userId: userId
+        userId: userId,
       },
-      order : [ ['createdAt', 'DESC']]
+      order: [["createdAt", "DESC"]],
     });
 
-    if(tasks) {
+    if (tasks) {
       res.status(200).json(tasks);
     } else {
-      res.status(500).json({ error: "server error" })
+      res.status(500).json({ error: "server error" });
     }
-
   } catch (err) {
     console.log("task fetch error ----- \n", err);
-    res.status(500).json({ error: "server error"});
+    res.status(500).json({ error: "server error" });
   }
 });
 

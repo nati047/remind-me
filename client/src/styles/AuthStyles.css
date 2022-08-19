@@ -16,7 +16,6 @@ header {
   color: aliceblue;
   font-size: 20px;
   font-weight: 500;
-  
 }
 
 .login-btn {
@@ -33,7 +32,7 @@ header {
   margin-top: 20px;
 }
 
-.login-form input, 
+.login-form input,
 .login-form select {
   height: 50px;
   width: 80%;
@@ -47,4 +46,12 @@ header {
   color: white;
   position: relative;
   left: 10%;
+}
+
+.login-link {
+  color: white;
+}
+
+.regisetr-link {
+  color: white;
 }

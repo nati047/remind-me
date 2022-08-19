@@ -5,7 +5,7 @@ const Joi = require("joi");
 
 router.post("/", async (req, res, next) => {
   if (!req.user) {
-    return res.status(401).json({ error: "Forbidden Access!" }); // TODO handle unauthorized request error
+    return res.status(403).json({ error: "Forbidden Access!" }); // TODO handle unauthorized request error
   }
   const { phoneNumber, id: userId } = req.user;
 
@@ -22,12 +22,12 @@ router.post("/", async (req, res, next) => {
 
   if (error) {
     console.log(error.details);
-    res.status(400).json({ error: "Invalid request body" });
+    return res.status(400).json({ error: "Invalid request body" });
   }
 
   const { description, taskType: frequency, date } = req.body;
   const dateString = date.toString();
-  
+
   try {
     const newTask = await Task.create({
       frequency,
@@ -47,7 +47,7 @@ router.post("/", async (req, res, next) => {
     console.log("data sent from /newTask to scheduleMessage \n \n", data);
     scheduleMessage(data);
 
-    res.sendStatus(200);
+    res.json(newTask);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "server error" });

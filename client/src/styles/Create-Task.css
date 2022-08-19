@@ -11,7 +11,7 @@
   padding-top: 10%;
   padding-left: 15%;
   color: white;
-  font-size: 22px; 
+  font-size: 22px;
   font-weight: 500;
 }
 
@@ -21,9 +21,9 @@
   align-self: center;
 }
 
-.form-create-task input, 
+.form-create-task input,
 .form-create-task select,
-.form-create-task textarea  {
+.form-create-task textarea {
   height: 40px;
   width: 80%;
   border-radius: 30px;
@@ -37,7 +37,7 @@
   border-radius: 10px;
 }
 
-.create-button  {
+.create-button {
   width: max-content;
   height: auto;
   padding: 5px 25px;

@@ -1,28 +1,42 @@
 const router = require("express").Router();
+const Joi = require("joi");
 const { Task } = require("../../db/models");
 
 router.post("/", async (req, res, next) => {
-  const taskId = req.body.id;
-  console.log("request in complete",req.body)
-  
-  try {
-    if (!req.user) {
-      return res.status(401).json({ error: "Forbidden Access!" }); // TODO handle unauthorized request error
-    }
+  if (!req.body || !req.body.id) {
+    return res.status(400).json({ error: "Request body missing!" });
+  }
 
+  const schema = Joi.object({
+    id: Joi.number().required(),
+  });
+  const { error } = schema.validate(req.body);
+
+  if (error) {
+    console.log(error.details);
+    return res.status(400).json({ error: "Invalid request body" });
+  }
+
+  const taskId = req.body.id;
+  console.log("request in complete", req.body);
+
+  if (!req.user) {
+    return res.status(401).json({ error: "Forbidden Access!" }); // TODO handle unauthorized request error
+  }
+
+  try {
     const task = await Task.findOne({
-      where: { id: taskId }
+      where: { id: taskId },
     });
 
-    await task.update({ completed: true })
-    
-    console.log("updated row \n", task)
+    await task.update({ completed: true });
+
+    console.log("updated row \n", task);
 
     res.sendStatus(200);
-
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: "server error"});
+    res.status(500).json({ error: "server error" });
   }
 });
 

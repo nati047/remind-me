@@ -1,78 +1,79 @@
-const router = require('express').Router();
+const router = require("express").Router();
 const jwt = require("jsonwebtoken");
-const { User } = require('../../db/models');
+const { User } = require("../../db/models");
 const Joi = require("joi");
 
 router.post("/login", async (req, res) => {
   const { userName, password } = req.body;
-  
-  if(!req.body || !userName || !password) {
-    console.log("missing stuff")
-    return res.status(401).json({ error: 'username and password required' })
+
+  if (!req.body || !userName || !password) {
+    console.log("missing stuff");
+    return res.status(401).json({ error: "username and password required" });
   }
 
   const loginSchema = Joi.object({
     userName: Joi.string().required(),
-    password: Joi.string().required()
-  })
+    password: Joi.string().required(),
+  });
 
-  const {error } = loginSchema.validate(req.body);
-  
-  if(error) {
-    return res.status(400).json({ error: 'Invalid Input!' })
+  const { error } = loginSchema.validate(req.body);
+
+  if (error) {
+    return res.status(400).json({ error: "Invalid Input!" });
   }
 
   try {
-
     const user = await User.findOne({
-      where: { userName: userName }
+      where: { userName: userName },
     });
 
     if (!user) {
       console.log({ error: `No user found for provided username` });
       return res.status(401).json({ error: "Wrong username and/or password" });
-    } 
-    else if (!user.correctPassword(password)) {
+    } else if (!user.correctPassword(password)) {
       console.log({ error: "Wrong username and/or password" });
       return res.status(401).json({ error: "Wrong username and/or password" });
-    } 
-    else {
+    } else {
       const token = jwt.sign(
         { id: user.dataValues.id },
         process.env.SESSION_SECRET,
         { expiresIn: 86400 }
       );
-     return res.json({
-       user :{
-         userName: user.dataValues.userName,
-         id: user.dataValues.id,
-       },
+      return res.json({
+        user: {
+          userName: user.dataValues.userName,
+          id: user.dataValues.id,
+        },
         token,
       });
     }
-
-  }
-  catch (err){
+  } catch (err) {
     console.log("db error\n", err);
-    return res.status(401).json({ error: 'server error' });
+    return res.status(401).json({ error: "server error" });
   }
 });
 
 router.post("/register", async (req, res) => {
   const newUser = req.body;
-  if (!req.body || !newUser || !newUser.userName || !newUser.password || !newUser.phoneNumber) {
-    console.log("-----------------------\n missing stuff")
-    return res.status(400).json({ error: "all fields are required"});
+  if (
+    !req.body ||
+    !newUser ||
+    !newUser.userName ||
+    !newUser.password ||
+    !newUser.phoneNumber
+  ) {
+    console.log("-----------------------\n missing stuff");
+    return res.status(400).json({ error: "all fields are required" });
   }
   const registrationSchema = Joi.object({
     userName: Joi.string().min(5).required(),
-    phoneNumber: Joi.string.min(10).required(),
-    password: Joi.string().min(8).max(15).required()
-  })
+    phoneNumber: Joi.string().min(10).required(),
+    password: Joi.string().min(8).max(15).required(),
+  });
   const { error } = registrationSchema.validate(req.body);
 
-  if(error) {
-    return res.status(400).json({ error: 'Invalid Input!' })
+  if (error) {
+    return res.status(400).json({ error: "Invalid Input!" });
   }
 
   try {
@@ -84,29 +85,26 @@ router.post("/register", async (req, res) => {
       { expiresIn: 300000 }
     );
 
-    console.log("-----------------------\nregister sucess")
-    return res.json({ user :{
-      userName: user.dataValues.userName,
-      id: user.dataValues.id,
-    },
-    token,
+    console.log("-----------------------\nregister sucess");
+    return res.json({
+      user: {
+        userName: user.dataValues.userName,
+        id: user.dataValues.id,
+      },
+      token,
     });
-
-  }
-  catch (error) {
+  } catch (error) {
     if (error.name === "SequelizeUniqueConstraintError") {
-      console.log("-----------------------\n user exists")
+      console.log("-----------------------\n user exists");
       return res.status(401).json({ error: "User already exists" });
-    }
-    else if (error.name === "SequelizeValidationError") {
-      console.log("-----------------------\n validation error")
+    } else if (error.name === "SequelizeValidationError") {
+      console.log("-----------------------\n validation error");
       return res.status(401).json({ error: "Validation error" });
-    }
-    else {
-      console.log(error)
-      return res.status(400).json({ error: 'server error' });
+    } else {
+      console.log(error);
+      return res.status(400).json({ error: "server error" });
     }
   }
-}); 
+});
 
 module.exports = router;

@@ -23,7 +23,6 @@
 .task-footer {
   display: flex;
   justify-content: space-between;
-
 }
 
 .task-footer-right {
@@ -49,7 +48,7 @@
 }
 
 .task-status {
-  color:white;
+  color: white;
   text-align: center;
   vertical-align: middle;
   width: auto;
@@ -59,7 +58,7 @@
   border-radius: 0 7px 0 7px;
 }
 
-.task-header .active  {
+.task-header .active {
   background-color: rgb(0, 0, 0);
 }
 .completed {
@@ -85,19 +84,19 @@
   font-weight: 700;
 }
 
-.complete  {
-  color: #3EAB16;
-  border: #3EAB16 2px solid;
+.complete {
+  color: #3eab16;
+  border: #3eab16 2px solid;
 }
 
 .delete {
-  color:#EB1E07;
-  border:  #EB1E07 2px solid;
+  color: #eb1e07;
+  border: #eb1e07 2px solid;
 }
 
 .restart {
-  color: #DBA14A;
-  border:  #DBA14A 2px solid;
+  color: #dba14a;
+  border: #dba14a 2px solid;
 }
 
 .complete:hover {

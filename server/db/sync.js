@@ -1,9 +1,9 @@
-const db = require('../db');
+const db = require("../db");
 
-const syncDb = async() => {
+const syncDb = async () => {
   console.log("sync in progress...");
   try {
-    await db.sync({ force: true })
+    await db.sync({ force: true });
     console.log("db synced!\n", msg);
   } catch (err) {
     console.error(err);
@@ -12,7 +12,7 @@ const syncDb = async() => {
     await db.close();
     console.log("db connection closed");
   }
-}
+};
 
 if (module === require.main) {
   syncDb();

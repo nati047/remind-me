@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap");
 :root {
   --text-color: white;
-  --bg-color:  #0E3794;
+  --bg-color: #0e3794;
   --task-bg: #1a2845;
   --tasks-box-shadow: rgb(1, 28, 68) 0px 0px 20px 2px;
   --tasks-broder-radius: 7px;
@@ -24,8 +24,13 @@ button:hover {
 
 div.home {
   /* background-color: var(--bg-color); */
-  background: rgb(2,0,36);
-  background: linear-gradient(137deg, rgba(2,0,36,1) 0%, rgba(14,55,148,1) 74%, rgba(0,127,255,1) 100%);
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    137deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(14, 55, 148, 1) 74%,
+    rgba(0, 127, 255, 1) 100%
+  );
   min-height: 100vh;
 }
 
@@ -39,29 +44,20 @@ section.main {
 
 div.introduction {
   color: var(--text-color);
-  /* border: red solid 1px; */
   width: 50%;
 }
 
 p.now {
   font-size: 50px;
-  font-family: 'Courier New', cursive;
+  font-family: "Courier New", cursive;
   margin-bottom: 50px;
 }
 
-/* div.image {
-  color: black;
-} */
 i.fa-sms {
   color: white;
   align-self: center;
   font-size: 400px;
 }
-/* img {
-  width: 50%;
-  height: 400px;
-  opacity: 50%;
-} */
 
 div.get-started {
   display: flex;
@@ -89,9 +85,21 @@ p.or {
   font-size: 30px;
   font-weight: 500;
 }
+
 .link,
-.link:hover 
-{
+.link:hover {
   text-decoration: none;
   color: inherit;
+}
+
+.reminder-types {
+  font-size: 1.8rem;
+  position: relative;
+  margin-left: 30px;
+  list-style-type: "~   ";
+}
+
+.about-app {
+  font-size: 2rem;
+  color: white;
 }

@@ -37,5 +37,9 @@
   border: none;
   position: relative;
 }
-
-
+.no-tasks {
+  color: white;
+  font-size: 2rem;
+  position: absolute;
+  top: 50%;
+}

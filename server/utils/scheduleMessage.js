@@ -17,7 +17,7 @@ const onComplete = async (data) => {
       await task.update({ completed: true });
       await task.save();
       return;
-    } 
+    }
 
     if (task.frequency === "daily") {
       let newDate = new Date(task.date);
