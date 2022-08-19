@@ -3,6 +3,10 @@ const Joi = require("joi");
 const { Task } = require("../../db/models");
 
 router.post("/", async (req, res, next) => {
+  if (!req.user) {
+    return res.status(401).json({ error: "Forbidden Access!" });
+  }
+
   if (!req.body || !req.body.id) {
     return res.status(400).json({ error: "Request body missing!" });
   }
@@ -18,10 +22,6 @@ router.post("/", async (req, res, next) => {
   }
 
   const taskId = req.body.id;
-
-  if (!req.user) {
-    return res.status(401).json({ error: "Forbidden Access!" });
-  }
 
   try {
     const task = await Task.findOne({

@@ -5,7 +5,7 @@ const Joi = require("joi");
 
 router.post("/", async (req, res, next) => {
   if (!req.user) {
-    return res.status(403).json({ error: "Forbidden Access!" }); 
+    return res.status(401).json({ error: "Forbidden Access!" }); 
   }
   const { phoneNumber, id: userId } = req.user;
 

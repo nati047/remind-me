@@ -28,7 +28,6 @@ app.use((req, res, next) => {
           return next();
         }
 
-        console.log(" token verified \n");
         User.findOne({
           where: {
             id: decoded.id,
