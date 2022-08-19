@@ -25,10 +25,7 @@ if (process.env.NODE_ENV === "production") {
 app.use((req, res, next) => {
   const token = req.headers["x-access-token"];
   if (token) {
-    jwt.verify(
-      token,
-      process.env.SESSION_SECRET,
-      (err, decoded) => {
+    jwt.verify(JSON.parse(token), process.env.SESSION_SECRET, (err, decoded) => {
         if (err) {
           return next();
         }
@@ -55,6 +52,10 @@ app.use((req, res, next) => {
 // mount routers
 app.use("/auth", require("./routes/auth"));
 app.use("/api", require("./routes/api"));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/build/index.html"));
+});
 
 app.listen(PORT, async () => {
   scheduleAllTasks();

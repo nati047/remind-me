@@ -2,14 +2,14 @@ import React from "react";
 import axios from "axios";
 import "../styles/AuthStyles.css";
 import { Formik } from "formik";
-import { useOutletContext, Navigate } from "react-router-dom";
+import { useOutletContext, Navigate, Link } from "react-router-dom";
 import * as Yup from "yup";
 import "yup-phone";
 import swal from "sweetalert";
 
 const regisetrUser = async (newUserInfo, setUser) => {
   axios
-    .post(`${process.env.REACT_APP_API_URL}/auth/register`, newUserInfo)
+    .post(`/auth/register`, newUserInfo)
     .then((response) => {
       const accessToken = response.data.token;
       const user = response.data.user;
@@ -115,7 +115,7 @@ function Register() {
               {...formik.getFieldProps("password")}
             />
           </section>
-          <div className="login-link">alreay have an account? <a href="/login">login.</a></div>
+          <div className="login-link">alreay have an account? <Link to="/login">login.</Link></div>
           <button className="login-btn">Sign Up</button>
         </form>
       )}

@@ -23,7 +23,7 @@ function CreateTask({ setUser, setSortedList }) {
       })}
       onSubmit={(values, { setSubmitting, resetForm }) => {
         axios
-          .post(`${process.env.REACT_APP_API_URL}/api/newTask`, values)
+          .post(`/api/newTask`, values)
           .then((response) => {
             resetForm({ values: "" });
 
@@ -37,7 +37,7 @@ function CreateTask({ setUser, setSortedList }) {
             setSubmitting(false);
 
             if (err.response.data.error === "Forbidden Access!") {
-              swal("Session Timedout");
+              swal("Session Timedout!","Login to gain access!", {icon: "info"});
               setUser({});
               localStorage.removeItem("access-token");
             } else {

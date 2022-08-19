@@ -1,11 +1,14 @@
 const Sequelize = require("sequelize");
+require("dotenv").config();
 
-const db = new Sequelize(
-  process.env.DATABASE_URL,
-  {
-    logging: false,
-  }
-);
+const connectionString =
+  process.env.NODE_ENV === "production"
+    ? process.env.DATABASE_URL
+    : process.env.DEV_DATABASE_URL;
+
+const db = new Sequelize(connectionString, {
+  logging: false,
+});
 
 // test connection
 const test = async () => {
@@ -16,6 +19,6 @@ const test = async () => {
     console.error("Unable to connect to the database:", error);
   }
 };
-// test();
+test();
 
 module.exports = db;

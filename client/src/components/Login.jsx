@@ -1,19 +1,19 @@
 import React from "react";
 import "../styles/AuthStyles.css";
 import { Formik } from "formik";
-import { Navigate, useOutletContext } from "react-router-dom";
+import { Navigate, useOutletContext, Link } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
 
 const login = async (data, setUser) => {
   axios
-    .post(`${process.env.REACT_APP_API_URL}/auth/login`, data)
+    .post(`/auth/login`, data)
     .then((response) => {
       const accessToken = response.data.token;
       const user = response.data.user;
 
       setUser(user);
-
+      console.log("user logged in", response.data);
       localStorage.setItem("access-token", JSON.stringify(accessToken));
       localStorage.setItem("user-state", JSON.stringify(true));
     })
@@ -84,7 +84,7 @@ function Login() {
               {...formik.getFieldProps("password")}
             />
           </section>
-          <div className="regisetr-link">New to Remind.me? <a href="/register">Sign Up</a></div>
+          <div className="regisetr-link">New to Remind.me? <Link to="/register">Sign Up</Link></div>
           <button className="login-btn">Login</button>
         </form>
       )}

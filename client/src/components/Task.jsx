@@ -17,7 +17,7 @@ function Task({ dateString, task, index, setSortedList }) {
     .then( async (willDelete) => {
       if (willDelete) {
         try {
-          await axios.post(`${process.env.REACT_APP_API_URL}/api/deleteTask`, { id: task.id });
+          await axios.post(`/api/deleteTask`, { id: task.id });
           
           swal("Task Deleted!", {icon: "success"});
 

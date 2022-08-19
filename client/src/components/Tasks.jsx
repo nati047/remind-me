@@ -16,7 +16,7 @@ function Tasks({ user, setUser }) {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/api/tasks`)
+      .get(`/api/tasks`)
       .then((response) => {
         setTasks(response.data);
         setSortedList(response.data);
