@@ -18,12 +18,6 @@ function Nav({ setUser, user }) {
           Remind.Me
         </NavLink>
         <div className="right">
-          {location === "/" && (
-            <>
-              {/* <p className="sign-up">Sign Up</p>
-            <p className="log-in">Log In</p> */}
-            </>
-          )}
           {location === "/tasks" && (
             <>
               <div className="avatar">
