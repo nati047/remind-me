@@ -6,9 +6,21 @@ const connectionString =
     ? process.env.DATABASE_URL
     : process.env.DEV_DATABASE_URL;
 
-const db = new Sequelize(connectionString, {
+const devConnOptions = {
   logging: false,
-});
+};
+
+const prodConnOptions = {
+  logging: false,
+  dialect: "postgres",
+  dialectOptions: {
+    ssl: true,
+  },
+};
+const connectionOptions =
+  process.env.NODE_ENV === "production" ? prodConnOptions : devConnOptions;
+
+const db = new Sequelize(connectionString, connectionOptions);
 
 // test connection
 const test = async () => {
