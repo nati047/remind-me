@@ -24,6 +24,7 @@ const connectionOptions =
   process.env.NODE_ENV === "production" ? prodConnOptions : devConnOptions;
 
 const db = new Sequelize(connectionString, connectionOptions);
+db.options.logging = false;
 
 // test connection
 const test = async () => {
