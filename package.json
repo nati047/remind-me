@@ -10,7 +10,8 @@
   "scripts": {
     "start": "node app.js",
     "heroku-postbuild": "cd client && npm install && npm run build",
-    "dev": "nodemon ./app.js"
+    "dev": "nodemon ./app.js",
+    "db:sync": "node ./db/sync.js"
   },
   "keywords": [],
   "author": "",

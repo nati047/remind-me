@@ -7,7 +7,7 @@ const connectionString =
     : process.env.DEV_DATABASE_URL;
 
 const devConnOptions = {
-  logging: false,
+  logging: true,
 };
 
 const prodConnOptions = {
@@ -34,6 +34,6 @@ const test = async () => {
     console.error("Unable to connect to the database:", error);
   }
 };
-test();
+// test();
 
 module.exports = db;

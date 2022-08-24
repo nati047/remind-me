@@ -14,6 +14,6 @@ const syncDb = async () => {
   }
 };
 
-if (module === require.main) {
-  syncDb();
-}
+
+syncDb();
+
